@@ -8,6 +8,23 @@
     "url": "https://github.com/near/pagoda-ui"
   },
   "keywords": ["react", "component", "library", "near", "pagoda"],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "format": "prettier --check ./src",
+    "format:fix": "prettier --write ./src",
+    "lint": "eslint ./src/**/*.ts*",
+    "lint:fix": "eslint . --fix",
+    "pre-commit": "pnpm format && pnpm lint --max-warnings 0 && pnpm ts:check",
+    "test": "pnpm pre-commit",
+    "ts:check": "tsc --noEmit --incremental",
+    "prepare": "husky"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": "9.1.1"
+  },
+  "packageManager": "pnpm@9.1.1",
   "files": ["dist"],
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -27,17 +44,6 @@
       "import": "./dist/*.css",
       "require": "./dist/*.css"
     }
-  },
-  "scripts": {
-    "dev": "rollup -c -w",
-    "build": "rollup -c",
-    "format": "prettier --check ./src",
-    "format:fix": "prettier --write ./src",
-    "lint": "eslint ./src/**/*.ts*",
-    "lint:fix": "eslint . --fix",
-    "pre-commit": "pnpm format && pnpm lint --max-warnings 0 && pnpm ts:check",
-    "ts:check": "tsc --noEmit --incremental",
-    "prepare": "husky"
   },
   "peerDependencies": {
     "next": ">=13",
