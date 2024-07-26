@@ -1,16 +1,11 @@
 import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import postcssPresetEnv from 'postcss-preset-env';
 import copy from 'rollup-plugin-copy';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
-const globals = {
-  react: 'React',
-  'react-dom': 'ReactDOM',
-};
 
 /** @type {import('rollup').RollupOptions} */
 const options = {
@@ -19,19 +14,20 @@ const options = {
     {
       file: './dist/index.esm.js',
       format: 'esm',
-      globals,
+      sourcemap: true,
     },
     {
       file: './dist/index.cjs.js',
       format: 'cjs',
-      globals,
+      sourcemap: true,
     },
   ],
   plugins: [
     peerDepsExternal(),
-    nodeResolve({ extensions, browser: true }),
+    resolve({ browser: true }),
     commonjs(),
     typescript(),
+    terser(),
     copy({
       targets: [
         { src: './src/styles/globals.css', dest: 'dist' },
