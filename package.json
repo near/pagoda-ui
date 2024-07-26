@@ -2,9 +2,13 @@
   "name": "@near-pagoda/ui",
   "version": "0.1.0",
   "description": "A React component library that implements the official NEAR design system.",
-  "files": [
-    "dist"
-  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/near/pagoda-ui"
+  },
+  "keywords": ["react", "component", "library", "near", "pagoda"],
+  "files": ["dist"],
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -78,6 +82,5 @@
     "sass": "^1.77.8",
     "tslib": "^2.6.2",
     "typescript": "^5"
-  },
-  "license": "MIT"
+  }
 }
