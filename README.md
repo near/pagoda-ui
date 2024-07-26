@@ -19,3 +19,15 @@ TODO...
 ## Local Development
 
 TODO... Walk through steps using `pnpm link` to test or see local changes within any project.
+
+## Publishing a Release
+
+- Merge all desired changes into `main` via pull requests.
+- Determine the version number for the new release.
+- Push updated `version` field in `package.json` to `main`.
+- Create a new release via GitHub: https://github.com/near/pagoda-ui/releases/new
+- Use updated `version` value as the new `tag` and `Release title` value and use `main` as the target branch.
+- Click the publish button.
+- A GitHub workflow will kick off to automatically publish a new version to NPM: https://github.com/near/pagoda-ui/actions/workflows/publish-to-npm.yml
+- The new version number published to NPM will be driven by the value in `package.json`.
+- Confirm published changes by visiting package: https://www.npmjs.com/package/@near-pagoda/ui
