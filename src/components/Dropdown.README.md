@@ -1,0 +1,54 @@
+# Dropdown
+
+Built with the Radix UI Dropdown Menu primitive: https://www.radix-ui.com/primitives/docs/components/dropdown-menu
+
+A more complex example when needing to implement sub dropdown menus:
+
+```tsx
+import { Horse, Pizza } from '@phosphor-icons/react';
+import { Button } from '@pagoda/ui/src/components/Button';
+import { SvgIcon } from '@pagoda/ui/src/components/SvgIcon';
+import * as Dropdown from '@pagoda/ui/src/components/Dropdown';
+
+...
+
+<Dropdown.Root>
+  <Dropdown.Trigger asChild>
+    <Button label="My Dropdown" iconRight={<Dropdown.Indicator />} />
+  </Dropdown.Trigger>
+
+  <Dropdown.Content>
+    <Dropdown.Section>
+      <Dropdown.SectionHeader>Section One</Dropdown.SectionHeader>
+
+      <Dropdown.Item>
+        <SvgIcon icon={<Horse weight="fill" />} />
+        Default Icon Color
+      </Dropdown.Item>
+
+      <Dropdown.Item>
+        <SvgIcon icon={<Pizza weight="fill" />} color="red8" />
+        Custom Icon Color
+      </Dropdown.Item>
+    </Dropdown.Section>
+
+    <Dropdown.Section>
+      <Dropdown.SectionHeader>Section Two</Dropdown.SectionHeader>
+
+      <Dropdown.Item>Simple Item 1</Dropdown.Item>
+      <Dropdown.Item>Simple Item 2</Dropdown.Item>
+
+      <Dropdown.Sub>
+        <Dropdown.SubTrigger asChild>
+          <Dropdown.Item>Sub Menu Item</Dropdown.Item>
+        </Dropdown.SubTrigger>
+
+        <Dropdown.SubContent>
+          <Dropdown.Item>Sub Item A</Dropdown.Item>
+          <Dropdown.Item>Sub Item B</Dropdown.Item>
+        </Dropdown.SubContent>
+      </Dropdown.Sub>
+    </Dropdown.Section>
+  </Dropdown.Content>
+</Dropdown.Root>
+```

@@ -1,0 +1,33 @@
+.card {
+  --card-color-background: var(--white);
+  --card-color-border: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+  padding: var(--gap-m);
+  border-radius: 6px;
+  box-shadow: var(--shadow-card);
+  background-color: var(--card-color-background);
+  border: 1px solid var(--card-color-border);
+  outline: none;
+  transition: all var(--transition-speed);
+
+  &[role='button'] {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 1px 3px 3px rgba(0, 0, 0, 0.1);
+      --card-color-background: var(--violet2);
+      --card-color-border: var(--violet4);
+    }
+    &:focus {
+      box-shadow: 0 0 0 4px var(--violet4);
+    }
+  }
+
+  :global(.html2canvas) & {
+    box-shadow: none;
+    border: 1px solid var(--sand8);
+  }
+}

@@ -1,0 +1,31 @@
+@mixin applyStack() {
+  flex-direction: column !important;
+  grid-template-columns: 1fr !important;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+@mixin applyStackOverride() {
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+}
+
+@mixin stack() {
+  &[data-stack='true'] {
+    @include applyStack();
+  }
+
+  &[data-stack='tablet'] {
+    @media screen and (max-width: 1000px) {
+      @include applyStack();
+      @include applyStackOverride();
+    }
+  }
+
+  &[data-stack='phone'] {
+    @media screen and (max-width: 600px) {
+      @include applyStack();
+      @include applyStackOverride();
+    }
+  }
+}

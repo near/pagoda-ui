@@ -1,0 +1,59 @@
+@import '../styles/mixins/gap';
+@import '../styles/mixins/stack';
+
+.flex {
+  display: flex;
+
+  @include gap();
+  @include stack();
+
+  &:empty {
+    display: none;
+  }
+  &:has(> .flex:first-child:last-child:empty) {
+    display: none;
+  }
+
+  &[data-stretch='true'] {
+    width: 100%;
+  }
+
+  &[data-align='start'] {
+    align-items: flex-start;
+  }
+  &[data-align='end'] {
+    align-items: flex-end;
+  }
+  &[data-align='center'] {
+    align-items: center;
+  }
+  &[data-align='stretch'] {
+    align-items: stretch;
+  }
+
+  &[data-justify='start'] {
+    justify-content: flex-start;
+  }
+  &[data-justify='end'] {
+    justify-content: flex-end;
+  }
+  &[data-justify='center'] {
+    justify-content: center;
+  }
+  &[data-justify='stretch'] {
+    justify-content: stretch;
+  }
+  &[data-justify='space-around'] {
+    justify-content: space-around;
+  }
+  &[data-justify='space-between'] {
+    justify-content: space-between;
+  }
+  &[data-justify='space-evenly'] {
+    justify-content: space-evenly;
+  }
+
+  &[data-wrap='true'] {
+    flex-wrap: wrap;
+  }
+}

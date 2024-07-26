@@ -1,0 +1,67 @@
+@mixin gap() {
+  & {
+    --gap: 0px;
+    gap: var(--gap);
+  }
+
+  &[data-gap='none'] {
+    --gap: 0px;
+  }
+  &[data-gap='xs'] {
+    --gap: var(--gap-xs);
+  }
+  &[data-gap='s'] {
+    --gap: var(--gap-s);
+  }
+  &[data-gap='m'] {
+    --gap: var(--gap-m);
+  }
+  &[data-gap='l'] {
+    --gap: var(--gap-l);
+  }
+  &[data-gap='xl'] {
+    --gap: var(--gap-xl);
+  }
+
+  @media screen and (max-width: 1000px) {
+    &[data-gap-tablet='none'] {
+      --gap: 0px;
+    }
+    &[data-gap-tablet='xs'] {
+      --gap: var(--gap-xs);
+    }
+    &[data-gap-tablet='s'] {
+      --gap: var(--gap-s);
+    }
+    &[data-gap-tablet='m'] {
+      --gap: var(--gap-m);
+    }
+    &[data-gap-tablet='l'] {
+      --gap: var(--gap-l);
+    }
+    &[data-gap-tablet='xl'] {
+      --gap: var(--gap-xl);
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &[data-gap-phone='none'] {
+      --gap: 0px;
+    }
+    &[data-gap-phone='xs'] {
+      --gap: var(--gap-xs);
+    }
+    &[data-gap-phone='s'] {
+      --gap: var(--gap-s);
+    }
+    &[data-gap-phone='m'] {
+      --gap: var(--gap-m);
+    }
+    &[data-gap-phone='l'] {
+      --gap: var(--gap-l);
+    }
+    &[data-gap-phone='xl'] {
+      --gap: var(--gap-xl);
+    }
+  }
+}

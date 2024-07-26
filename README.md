@@ -1,2 +1,15 @@
-# ui-lib
-A React component library that implements the official NEAR design system.
+# NEAR/Pagoda UI
+
+A React component library that implements the official design system of NEAR and Pagoda.
+
+## Installation
+
+TODO...
+
+## Contributing
+
+TODO...
+
+## Local Development
+
+TODO... Walk through steps using `pnpm link` to test or see local changes within any project.

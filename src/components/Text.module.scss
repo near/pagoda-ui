@@ -1,0 +1,40 @@
+.text {
+  text-wrap: pretty;
+
+  &[data-clamp-lines] {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  &[data-size='text-3xl'] {
+    font: var(--text-3xl);
+    color: var(--sand12);
+  }
+  &[data-size='text-2xl'] {
+    font: var(--text-2xl);
+    color: var(--sand12);
+  }
+  &[data-size='text-xl'] {
+    font: var(--text-xl);
+    color: var(--sand12);
+  }
+  &[data-size='text-l'] {
+    font: var(--text-l);
+    color: var(--sand12);
+  }
+  &[data-size='text-base'] {
+    font: var(--text-base);
+    color: var(--sand11);
+  }
+  &[data-size='text-s'] {
+    font: var(--text-s);
+    color: var(--sand11);
+  }
+  &[data-size='text-xs'] {
+    font: var(--text-xs);
+    color: var(--sand11);
+  }
+}
