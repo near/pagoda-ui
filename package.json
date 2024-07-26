@@ -5,9 +5,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/near/pagoda-ui"
+    "url": "git+https://github.com/near/pagoda-ui.git"
   },
-  "keywords": ["react", "component", "library", "near", "pagoda"],
+  "keywords": [
+    "react",
+    "component",
+    "library",
+    "near",
+    "pagoda"
+  ],
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
@@ -25,7 +31,9 @@
     "pnpm": "9.1.1"
   },
   "packageManager": "pnpm@9.1.1",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
