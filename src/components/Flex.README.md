@@ -5,8 +5,7 @@ This component helps solve common flex layout requirements. If you need a more s
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 ```tsx
-import { Flex } from '@pagoda/ui/src/components/Flex';
-import { Text } from '@pagoda/ui/src/components/Text';
+import { Flex, Text } from '@near-pagoda/ui';
 
 ...
 

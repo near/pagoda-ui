@@ -3,7 +3,7 @@
 Built with the Radix UI Dialog primitive: https://www.radix-ui.com/primitives/docs/components/dialog
 
 ```tsx
-import * as Dialog from '@pagoda/ui/src/components/Dialog';
+import { Dialog } from '@near-pagoda/ui';
 
 ...
 

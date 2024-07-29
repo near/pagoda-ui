@@ -3,7 +3,7 @@
 This component is most useful directly inside page components. They expand the entire width of the screen and apply a container to give the content a default max-width and flex stack gap. When multiple `<Section>` components are at the same level, a default border will be applied to help visually separate them.
 
 ```tsx
-import { Section } from '@pagoda/ui/src/components/Section';
+import { Section } from '@near-pagoda/ui';
 
 ...
 

@@ -5,8 +5,7 @@ This component helps solve common grid layout requirements. If you need a more s
 https://css-tricks.com/snippets/css/complete-guide-grid/
 
 ```tsx
-import { Grid } from '@pagoda/ui/src/components/Grid';
-import { Card } from '@pagoda/ui/src/components/Card';
+import { Grid, Card } from '@near-pagoda/ui';
 
 ...
 

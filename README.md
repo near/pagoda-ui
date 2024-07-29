@@ -2,15 +2,24 @@
 
 A React component library that implements the official design system of NEAR and Pagoda. Feel free to open up new issues for any bugs that you run into or any features/components you'd like to see implemented.
 
-*NOTE: As of now, this library has a peer dependency on Next JS since some of our components rely on `next/link` and hooks like `router.push()`. We'll look into refactoring the library soon to remove the Next JS requirement so that our library can be used within any React framework.*
+## Required Peer Dependencies
+
+**React 18**
+
+**Next JS >=13** - Some of our components rely on `next/link` and hooks like `router.push()`. We'll look into refactoring the library soon to remove the Next JS requirement so that our library can be used within any React framework.
+
+**Zustand 4** - Our `openToast()` method is able to work in any context due to relying on a Zustand global store.
 
 ## Installation
 
-TODO...
+```bash
+pnpm add zustand next
+pnpm add @near-pagoda/ui
+```
 
 ## Documentation
 
-TODO...
+Please refer to `README.md` files in `src/components` for examples and documentation of components.
 
 ## Contributing
 
@@ -18,7 +27,13 @@ TODO...
 
 ## Local Development
 
-TODO... Walk through steps using `pnpm link` to test or see local changes within any project.
+Due to this library having peer dependencies, `pnpm link` isn't compatible. Follow these steps to preview local changes to the UI library within any project:
+
+- Have your project and the UI library cloned as siblings. EG: `projects/cool-project` and `projects/pagoda-ui`
+- Inside `pagoda-ui`, make sure you've installed dependencies and build your changes with `pnpm i` and `pnpm build`
+- Inside your project folder, run `pnpm i file:../pagoda-ui` and then boot up your dev server
+- After making any changes to `pagoda-ui`, make sure you run `pnpm build` to then see changes when previewing your project
+- Once you're done previewing changes, make sure you revert changes to the `package.json` and lock file in your project so that it no longer references `file:../pagoda-ui`.
 
 ## Publishing a Release
 

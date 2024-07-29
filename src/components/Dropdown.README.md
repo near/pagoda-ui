@@ -6,9 +6,7 @@ A more complex example when needing to implement sub dropdown menus:
 
 ```tsx
 import { Horse, Pizza } from '@phosphor-icons/react';
-import { Button } from '@pagoda/ui/src/components/Button';
-import { SvgIcon } from '@pagoda/ui/src/components/SvgIcon';
-import * as Dropdown from '@pagoda/ui/src/components/Dropdown';
+import { Button, Dropdown, SvgIcon } from '@near-pagoda/ui';
 
 ...
 

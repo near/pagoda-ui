@@ -1,7 +1,7 @@
 # Text
 
 ```tsx
-import { Text } from '@pagoda/ui/src/components/Text';
+import { Text } from '@near-pagoda/ui';
 
 ...
 

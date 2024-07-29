@@ -4,6 +4,7 @@ import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import postcssPresetEnv from 'postcss-preset-env';
 import copy from 'rollup-plugin-copy';
+import del from 'rollup-plugin-delete';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 
@@ -47,6 +48,7 @@ const options = {
         }),
       ],
     }),
+    del({ targets: 'dist/styles.css' }),
   ],
 };
 

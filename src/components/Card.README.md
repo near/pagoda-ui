@@ -1,8 +1,7 @@
 # Card
 
 ```tsx
-import { Card } from '@pagoda/ui/src/components/Card';
-import { Text } from '@pagoda/ui/src/components/Text';
+import { Card, Text } from '@near-pagoda/ui';
 
 ...
 

@@ -3,7 +3,7 @@
 Built with the Downshift `useCombobox()` hook: https://www.downshift-js.com/use-combobox
 
 ```tsx
-import { Combobox } from '@pagoda/ui/src/components/Combobox';
+import { Combobox } from '@near-pagoda/ui';
 
 ...
 

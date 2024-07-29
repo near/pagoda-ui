@@ -6,11 +6,7 @@ Tables are great for listing lots of data for users to easily scan. This compone
 
 ```tsx
 import { Moon, Pencil, Rainbow, Sun, Trash } from '@phosphor-icons/react';
-import { Button } from '@pagoda/ui/src/components/Button';
-import { SvgIcon } from '@pagoda/ui/src/components/SvgIcon';
-import { Flex } from '@pagoda/ui/src/components/Flex';
-import { Text } from '@pagoda/ui/src/components/Text';
-import * as Table from '@pagoda/ui/src/components/Table';
+import { Button, SvgIcon, Flex, Text, Table } from '@near-pagoda/ui';
 
 const tableRows = [
   {
@@ -181,7 +177,7 @@ Just like regular table cells, you can pass an `onClick()` prop to a `HeaderCell
 You can combine the `onClick()` and `sort` props on a `HeaderCell` to implement UI for toggling sort order by column. You can implement the actual sorting logic on either the client or API side depending on your needs. The `sort` prop simply renders an arrow icon indicating the current sort direction to the user (as well as indicating that it can be interacted with).
 
 ```tsx
-import { unreachable } from '@pagoda/ui/src/utils/unreachable';
+import { unreachable } from '@near-pagoda/ui';
 import { useState } from 'react';
 
 type SortType = 'DATE_ASC' | 'DATE_DES' | 'NAME_ASC' | 'NAME_DES';

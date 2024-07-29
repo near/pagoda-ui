@@ -1,7 +1,7 @@
 # Button
 
 ```tsx
-import { Button } from '@pagoda/ui/src/components/Button';
+import { Button } from '@near-pagoda/ui';
 import { Horse, Pizza } from '@phosphor-icons/react';
 
 ...

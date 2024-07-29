@@ -3,7 +3,7 @@
 Built with the Radix UI Accordion primitive: https://www.radix-ui.com/primitives/docs/components/accordion
 
 ```tsx
-import * as Accordion from '@pagoda/ui/src/components/Accordion';
+import { Accordion } from '@near-pagoda/ui';
 
 ...
 

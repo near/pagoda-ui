@@ -1,6 +1,7 @@
 # SVG Icon
 
 ```tsx
+import { SvgIcon } from '@near-pagoda/ui';
 import { Horse } from '@phosphor-icons/react';
 
 ...

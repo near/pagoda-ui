@@ -7,7 +7,7 @@ Built with the Radix UI Tabs primitive: https://www.radix-ui.com/primitives/docs
 This approach allows you to sync the active tab with the URL. This should be the preferred approach for most tabs.
 
 ```tsx
-import * as Tabs from '@pagoda/ui/src/components/Tabs';
+import { Tabs } from '@near-pagoda/ui';
 import { useRouter } from 'next/router';
 
 ...
@@ -43,7 +43,7 @@ const selectedTab = router.query.tab as string;
 ## Buttons
 
 ```tsx
-import * as Tabs from '@pagoda/ui/src/components/Tabs';
+import { Tabs } from '@near-pagoda/ui';
 ...
 
 <Tabs.Root>

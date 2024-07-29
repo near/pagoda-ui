@@ -3,8 +3,7 @@
 Built with the Radix UI Tooltip primitive: https://www.radix-ui.com/primitives/docs/components/tooltip
 
 ```tsx
-import { Button } from '@pagoda/ui/src/components/Button';
-import { Tooltip } from '@pagoda/ui/src/components/Tooltip';
+import { Button, Tooltip } from '@near-pagoda/ui';
 
 ...
 
