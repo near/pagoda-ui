@@ -19,7 +19,7 @@ export const Tooltip = ({ asChild, children, content, root, side = 'top', sideOf
   return (
     <Primitive.Provider>
       <Primitive.Root delayDuration={delayDuration} {...root}>
-        <Primitive.Trigger className={asChild ? undefined : s.trigger} asChild={asChild}>
+        <Primitive.Trigger className={asChild ? undefined : s.trigger} asChild={asChild} type="button">
           {children}
         </Primitive.Trigger>
 
