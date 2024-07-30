@@ -31,7 +31,7 @@ Due to this library having peer dependencies, `pnpm link` isn't compatible. Foll
 
 - Have your project and the UI library cloned as siblings. EG: `projects/cool-project` and `projects/pagoda-ui`
 - Inside `pagoda-ui`, make sure you've installed dependencies and build your changes with `pnpm i` and `pnpm build`
-- Inside your project folder, run `pnpm i file:../pagoda-ui` and then boot up your dev server
+- Inside your project folder, run `pnpm add file:../pagoda-ui` and then boot up your dev server
 - After making any changes to `pagoda-ui`, make sure you run `pnpm build` to then see changes when previewing your project
 - Once you're done previewing changes, make sure you revert changes to the `package.json` and lock file in your project so that it no longer references `file:../pagoda-ui`.
 
