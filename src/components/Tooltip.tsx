@@ -10,15 +10,25 @@ type Props = ContentProps & {
   asChild?: boolean;
   children: ReactElement;
   content: ReactNode;
+  disabled?: boolean;
   root?: RootProps;
 };
 
-export const Tooltip = ({ asChild, children, content, root, side = 'top', sideOffset = 6, ...props }: Props) => {
+export const Tooltip = ({
+  asChild,
+  children,
+  content,
+  disabled,
+  root,
+  side = 'top',
+  sideOffset = 6,
+  ...props
+}: Props) => {
   const delayDuration = root?.delayDuration || 200;
 
   return (
     <Primitive.Provider>
-      <Primitive.Root delayDuration={delayDuration} {...root}>
+      <Primitive.Root delayDuration={delayDuration} open={disabled ? false : undefined} {...root}>
         <Primitive.Trigger className={asChild ? undefined : s.trigger} asChild={asChild} type="button">
           {children}
         </Primitive.Trigger>
