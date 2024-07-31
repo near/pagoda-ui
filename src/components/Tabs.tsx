@@ -48,7 +48,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>((props, ref) => {
 });
 List.displayName = 'List';
 
-export const Content = forwardRef<HTMLDivElement, ContentProps>((props, ref) => {
+export const Content = forwardRef<HTMLDivElement, ContentProps>(({ tabIndex = -1, ...props }, ref) => {
   return <Primitive.Content className={s.content} ref={ref} {...props} />;
 });
 Content.displayName = 'Content';
