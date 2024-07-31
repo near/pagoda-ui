@@ -3,7 +3,7 @@ import { CSSProperties, ReactNode } from 'react';
 import { ThemeColor, ThemeFontSize } from '../utils/types';
 import s from './Text.module.scss';
 
-type Tag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+type Tag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'label';
 
 const defaultSizes: Record<Tag, ThemeFontSize> = {
   h1: 'text-3xl',
@@ -14,10 +14,11 @@ const defaultSizes: Record<Tag, ThemeFontSize> = {
   h6: 'text-s',
   p: 'text-base',
   span: 'text-base',
+  label: 'text-base',
 };
 
 type Props = {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+  as?: Tag;
   children: ReactNode;
   clampLines?: number;
   className?: string;
