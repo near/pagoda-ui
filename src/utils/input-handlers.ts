@@ -38,15 +38,6 @@ export function numberInputHandler(
       validCharacters.substring(0, indexOfDecimal) + '.' + validCharacters.substring(indexOfDecimal).replace(/\./g, '');
   }
 
-  if (allowDecimal && validCharacters.includes('.')) {
-    // Ensures only 2 decimal digits
-    const indexOfDecimal = validCharacters.indexOf('.');
-    validCharacters =
-      validCharacters.substring(0, indexOfDecimal) +
-      '.' +
-      validCharacters.substring(indexOfDecimal, indexOfDecimal + 3).replace(/\./g, '');
-  }
-
   if (validCharacters !== event.currentTarget.value) {
     event.currentTarget.value = validCharacters;
   }
