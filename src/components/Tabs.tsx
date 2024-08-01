@@ -20,24 +20,8 @@ type TriggerProps = ComponentProps<typeof Primitive.Trigger> & {
 
 export const Root = forwardRef<HTMLDivElement, RootProps>(
   ({ size = 'default', value, variant = 'line', ...props }, ref) => {
-    const elementRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-      const target = elementRef.current?.querySelector('[data-state="active"]') as HTMLButtonElement;
-      if (target) {
-        target.scrollIntoView();
-      }
-    }, [value]);
-
     return (
-      <Primitive.Root
-        className={s.root}
-        data-size={size}
-        data-variant={variant}
-        value={value}
-        ref={mergeRefs([ref, elementRef])}
-        {...props}
-      />
+      <Primitive.Root className={s.root} data-size={size} data-variant={variant} value={value} ref={ref} {...props} />
     );
   },
 );
