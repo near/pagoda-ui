@@ -10,11 +10,19 @@ A React component library that implements the official design system of NEAR and
 
 **Zustand 4** - Our `openToast()` method is able to work in any context due to relying on a Zustand global store.
 
-## Installation
+## Installation & Setup
 
 ```bash
 pnpm add zustand next
 pnpm add @near-pagoda/ui
+```
+
+In your `_app.tsx` file, you'll need to import the following CSS files:
+
+```tsx
+import '@near-pagoda/ui/globals.css';
+import '@near-pagoda/ui/theme.css';
+import '@near-pagoda/ui/lib.css';
 ```
 
 ## Documentation
