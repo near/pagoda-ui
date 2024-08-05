@@ -31,17 +31,30 @@ Please refer to `README.md` files in `src/components` for examples and documenta
 
 ## Contributing
 
-TODO...
+Run these commands to begin local development and watch for changes:
 
-## Local Development
+```bash
+pnpm dev
+pnpm test:watch
+```
 
-Due to this library having peer dependencies, `pnpm link` isn't compatible. Follow these steps to preview local changes to the UI library within any project:
+- Create a branch off of `main`
+- Test your local changes
+- Push a PR for review
 
-- Have your project and the UI library cloned as siblings. EG: `projects/cool-project` and `projects/pagoda-ui`
-- Inside `pagoda-ui`, make sure you've installed dependencies and build your changes with `pnpm i` and `pnpm build`
-- Inside your project folder, run `pnpm add file:../pagoda-ui` and then boot up your dev server
-- After making any changes to `pagoda-ui`, make sure you run `pnpm build` to then see changes when previewing your project
-- Once you're done previewing changes, make sure you revert changes to the `package.json` and lock file in your project so that it no longer references `file:../pagoda-ui`.
+_NOTE: A development preview environment for the component library will be developed soon: https://github.com/near/pagoda-ui/issues/6_
+
+## Test Local Changes
+
+Follow these steps to preview local changes to the UI library within any project that depends on the library:
+
+- Have your project and the UI library cloned as siblings. EG: `projects/cool-project` and `projects/pagoda-ui`.
+- Inside `pagoda-ui`, run `pnpm dev`.
+- Inside your project folder, run `pnpm add file:../pagoda-ui`.
+- After making any changes to `pagoda-ui`, you will need to restart your project's development server for the component changes to appear locally within your project.
+- Once you're done testing changes, make sure you revert the changes in your project's `package.json` and lock file so that you're no longer referencing the local file protocol (eg: `file:../pagoda-ui`).
+
+_NOTE: Due to this library having peer dependencies, `pnpm link` isn't compatible - that's why we have to rely on using `file:` instead._
 
 ## Publishing a Release
 

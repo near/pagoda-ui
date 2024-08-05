@@ -16,7 +16,6 @@ export * from './components/Grid';
 export * from './components/HorizontalRule';
 export * from './components/Input';
 export * from './components/InputTextarea';
-export * from './components/MetaTags';
 export * from './components/NoSsr';
 export * from './components/Placeholder';
 export * from './components/Section';
