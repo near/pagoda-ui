@@ -1,36 +1,86 @@
 import { FileArrowUp, Paperclip } from '@phosphor-icons/react';
-import type { ChangeEventHandler, ComponentProps, CSSProperties, DragEventHandler, FocusEventHandler } from 'react';
+import type { ChangeEventHandler, CSSProperties, DragEventHandler, FocusEventHandler } from 'react';
 import { forwardRef, useState } from 'react';
 
 import { useDebouncedValue } from '../hooks/debounce';
+import { formatBytes } from '../utils/number';
 import { AssistiveText } from './AssistiveText';
 import s from './FileInput.module.scss';
 import { SvgIcon } from './SvgIcon';
 import { Text } from './Text';
+import { openToast } from './Toast';
 
 type Props = {
-  accept: ComponentProps<'input'>['accept'];
+  accept: '*' | 'image/*' | 'audio/*' | 'video/*' | (string & {}); // https://stackoverflow.com/a/61048124
   className?: string;
   disabled?: boolean;
   error?: string;
   label?: string;
+  maxFileSizeBytes?: number;
   multiple?: boolean;
   name: string;
   onBlur?: FocusEventHandler<HTMLInputElement>;
-  onChange: (value: FileList | null) => any;
+  onChange: (value: File[] | null) => any;
   style?: CSSProperties;
-  value?: FileList | null | undefined;
+  value?: File[] | null | undefined;
 };
 
 export const FileInput = forwardRef<HTMLInputElement, Props>(
-  ({ className = '', disabled, label, error, style, name, value, ...props }, ref) => {
+  (
+    { accept, className = '', disabled, label, error, maxFileSizeBytes, multiple, name, style, value, ...props },
+    ref,
+  ) => {
     const [isDragging, setIsDragging] = useState(false);
     const isDraggingDebounced = useDebouncedValue(isDragging, 50);
-    const files = [...(value ?? [])];
     const assistiveTextId = `${name}-assistive-text`;
 
+    const handleFileListChange = (fileList: FileList | null) => {
+      let files = [...(fileList ?? [])];
+      if (!multiple) {
+        files = files.slice(0, 1);
+      }
+
+      const accepted = accept.split(',').map((type) => type.trim());
+      const errors: string[] = [];
+
+      const validFiles = files.filter((file) => {
+        const fileTypeCategory = file.type.split('/').shift()!;
+        const fileExtension = file.name.split('.').pop()!;
+
+        const fileTypeIsValid =
+          accepted.includes('*') ||
+          accepted.includes(`${fileTypeCategory}/*`) ||
+          accepted.includes(file.type) ||
+          accepted.includes(`.${fileExtension}`);
+
+        const fileSizeIsValid = !maxFileSizeBytes || file.size <= maxFileSizeBytes;
+
+        if (!fileTypeIsValid) {
+          errors.push(`File type not allowed: ${file.type}. Allowed file types: ${accept}`);
+          return false;
+        }
+
+        if (!fileSizeIsValid) {
+          errors.push(`File size exceeds maximum of: ${formatBytes(maxFileSizeBytes)}`);
+          return false;
+        }
+
+        return true;
+      });
+
+      errors.forEach((error) => {
+        openToast({
+          type: 'error',
+          title: 'Invalid File',
+          description: error,
+        });
+      });
+
+      props.onChange(validFiles.length > 0 ? validFiles : null);
+    };
+
     const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-      props.onChange(event.target.files);
+      handleFileListChange(event.target.files);
     };
 
     const onDragLeave: DragEventHandler<HTMLLabelElement> = () => {
@@ -45,7 +95,7 @@ export const FileInput = forwardRef<HTMLInputElement, Props>(
     const onDrop: DragEventHandler<HTMLLabelElement> = async (event) => {
       event.preventDefault();
       setIsDragging(false);
-      props.onChange(event.dataTransfer.files);
+      handleFileListChange(event.dataTransfer.files);
     };
 
     return (
@@ -64,20 +114,21 @@ export const FileInput = forwardRef<HTMLInputElement, Props>(
           className={s.nativeInput}
           aria-errormessage={error ? assistiveTextId : undefined}
           aria-invalid={!!error}
+          accept={accept}
+          multiple={multiple}
           ref={ref}
           name={name}
           disabled={disabled}
           {...props}
           onChange={onChange}
-          value={undefined}
         />
 
         {label && <span className={s.label}>{label}</span>}
 
         <div className={s.input}>
-          {files.length > 0 && (
+          {value && value.length > 0 && (
             <div className={s.files}>
-              {files.map((file) => (
+              {value.map((file) => (
                 <div className={s.file} key={file.name}>
                   {file.type.includes('image/') && <img src={URL.createObjectURL(file)} alt={file.name} />}
 
@@ -92,7 +143,9 @@ export const FileInput = forwardRef<HTMLInputElement, Props>(
 
           <div className={s.cta}>
             <SvgIcon icon={<FileArrowUp />} color="violet8" />
-            <Text size="text-s">Select or drag & drop {props.multiple ? 'files' : 'file'}</Text>
+            <Text size="text-s" color="sand12">
+              Select or drag & drop {multiple ? 'files' : 'file'}
+            </Text>
           </div>
         </div>
 

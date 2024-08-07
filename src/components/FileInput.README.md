@@ -1,5 +1,9 @@
 # FileInput
 
+This component uses a native `<input type="file" />` tag underneath the hood. The [accept](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) and [multiple](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/multiple) props are passed through to the input tag and behave as they would natively. We've included client side validation to make sure the `accept` and `multiple` props are respected for both selected and dropped files.
+
+Additionally, you can pass a value for `maxFileSizeBytes` to limit the max size of each file. The default is unlimited (undefined).
+
 ```tsx
 import { FileInput } from '@near-pagoda/ui';
 
@@ -16,11 +20,11 @@ const [disabled, setDisabled] = useState(false);
   accept="image/*"
   error={error}
   disabled={disabled}
+  maxFileSizeBytes={1_000_000}
   multiple
-  onChange={(fileList) => console.log(fileList)}
+  onChange={(files) => console.log(files)}
 />
 ```
-
 
 ## React Hook Form
 
@@ -29,7 +33,7 @@ import { FileInput } from '@near-pagoda/ui';
 import { Controller, useForm } from 'react-hook-form';
 
 type FormSchema = {
-  artwork: FileList;
+  artwork: File[];
 };
 
 ...
