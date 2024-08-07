@@ -10,6 +10,7 @@ export * from './components/Combobox';
 export * from './components/Container';
 export * as Dialog from './components/Dialog';
 export * as Dropdown from './components/Dropdown';
+export * from './components/FileInput';
 export * from './components/Flex';
 export * from './components/Form';
 export * from './components/Grid';
