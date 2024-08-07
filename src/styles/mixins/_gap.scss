@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin gap() {
   & {
     --gap: 0px;
@@ -23,7 +25,7 @@
     --gap: var(--gap-xl);
   }
 
-  @media screen and (max-width: 1000px) {
+  @media (max-width: $tabletBreakpointMaxWidth) {
     &[data-gap-tablet='none'] {
       --gap: 0px;
     }
@@ -44,7 +46,7 @@
     }
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     &[data-gap-phone='none'] {
       --gap: 0px;
     }

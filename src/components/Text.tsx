@@ -25,6 +25,8 @@ type Props = {
   color?: ThemeColor;
   id?: string;
   size?: ThemeFontSize;
+  sizePhone?: ThemeFontSize;
+  sizeTablet?: ThemeFontSize;
   style?: CSSProperties;
   weight?: string | number;
 };
@@ -36,6 +38,8 @@ export const Text = ({
   className = '',
   color,
   size,
+  sizePhone,
+  sizeTablet,
   style,
   weight,
   ...props
@@ -48,6 +52,8 @@ export const Text = ({
       className={`${s.text} ${className}`}
       data-clamp-lines={clampLines}
       data-size={size || defaultSize}
+      data-size-phone={sizePhone}
+      data-size-tablet={sizeTablet}
       style={{
         color: color ? (color === 'current' ? 'currentColor' : `var(--${color})`) : undefined,
         fontWeight: weight,

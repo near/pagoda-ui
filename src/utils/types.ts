@@ -17,7 +17,16 @@ export type ThemeColor =
   | ColorViolet
   | ColorWhite;
 
-export type ThemeFontSize = 'text-xs' | 'text-s' | 'text-base' | 'text-l' | 'text-xl' | 'text-2xl' | 'text-3xl';
+export type ThemeFontSize =
+  | 'text-xs'
+  | 'text-s'
+  | 'text-base'
+  | 'text-l'
+  | 'text-xl'
+  | 'text-2xl'
+  | 'text-3xl'
+  | 'text-hero-m'
+  | 'text-hero-l';
 
 type ColorAmber =
   | 'amber1'

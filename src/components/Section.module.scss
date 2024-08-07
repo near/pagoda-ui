@@ -1,3 +1,5 @@
+@import '../styles/mixins/variables';
+
 .section {
   --section-padding-x: var(--gap-l);
   --section-padding-y: var(--gap-xl);
@@ -28,7 +30,7 @@
     min-height: calc(100svh - var(--header-height));
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     --section-padding-x: var(--gap-m);
     --section-padding-y: var(--gap-l);
   }

@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin applyStack() {
   flex-direction: column !important;
   grid-template-columns: 1fr !important;
@@ -16,14 +18,14 @@
   }
 
   &[data-stack='tablet'] {
-    @media screen and (max-width: 1000px) {
+    @media (max-width: $tabletBreakpointMaxWidth) {
       @include applyStack();
       @include applyStackOverride();
     }
   }
 
   &[data-stack='phone'] {
-    @media screen and (max-width: 600px) {
+    @media (max-width: $phoneBreakpointMaxWidth) {
       @include applyStack();
       @include applyStackOverride();
     }
