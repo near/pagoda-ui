@@ -7,6 +7,7 @@ import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 /** @type {import('rollup').RollupOptions} */
 const options = {
@@ -49,6 +50,7 @@ const options = {
       ],
     }),
     del({ targets: 'dist/styles.css' }),
+    visualizer(),
   ],
 };
 
