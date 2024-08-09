@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin gap() {
   & {
     --gap: 0px;
@@ -22,8 +24,14 @@
   &[data-gap='xl'] {
     --gap: var(--gap-xl);
   }
+  &[data-gap='2xl'] {
+    --gap: var(--gap-2xl);
+  }
+  &[data-gap='3xl'] {
+    --gap: var(--gap-3xl);
+  }
 
-  @media screen and (max-width: 1000px) {
+  @media (max-width: $tabletBreakpointMaxWidth) {
     &[data-gap-tablet='none'] {
       --gap: 0px;
     }
@@ -42,9 +50,15 @@
     &[data-gap-tablet='xl'] {
       --gap: var(--gap-xl);
     }
+    &[data-gap-tablet='2xl'] {
+      --gap: var(--gap-2xl);
+    }
+    &[data-gap-tablet='3xl'] {
+      --gap: var(--gap-3xl);
+    }
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     &[data-gap-phone='none'] {
       --gap: 0px;
     }
@@ -62,6 +76,12 @@
     }
     &[data-gap-phone='xl'] {
       --gap: var(--gap-xl);
+    }
+    &[data-gap-phone='2xl'] {
+      --gap: var(--gap-2xl);
+    }
+    &[data-gap-phone='3xl'] {
+      --gap: var(--gap-3xl);
     }
   }
 }

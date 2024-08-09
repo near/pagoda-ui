@@ -1,6 +1,6 @@
 .card {
-  --card-color-background: var(--white);
-  --card-color-border: var(--white);
+  --card-background-color: var(--white);
+  --card-border-color: var(--white);
 
   display: flex;
   flex-direction: column;
@@ -8,18 +8,30 @@
   padding: var(--gap-m);
   border-radius: 6px;
   box-shadow: var(--shadow-card);
-  background-color: var(--card-color-background);
-  border: 1px solid var(--card-color-border);
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
   outline: none;
   transition: all var(--transition-speed);
 
-  &[role='button'] {
+  &[data-padding='l'] {
+    padding: var(--gap-l);
+  }
+
+  &[data-gap='l'] {
+    gap: var(--gap-l);
+  }
+
+  &[role='button'],
+  &[href] {
     cursor: pointer;
 
     &:hover {
-      box-shadow: 0px 1px 3px 3px rgba(0, 0, 0, 0.1);
-      --card-color-background: var(--violet2);
-      --card-color-border: var(--violet4);
+      box-shadow: 0px 1px 10px 5px rgba(0, 0, 0, 0.2);
+
+      &[data-background='black'],
+      &[data-background='sand12'] {
+        --card-background-color: var(--whiteA4) !important;
+      }
     }
     &:focus {
       box-shadow: 0 0 0 4px var(--violet4);
@@ -29,5 +41,20 @@
   :global(.html2canvas) & {
     box-shadow: none;
     border: 1px solid var(--sand8);
+  }
+}
+
+.cardThumbnail {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

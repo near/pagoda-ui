@@ -8,11 +8,10 @@
   --gap-m: 1rem;
   --gap-l: 2rem;
   --gap-xl: 4rem;
+  --gap-2xl: 6rem;
+  --gap-3xl: 8rem;
 
   --header-height: 70px;
-  @media (max-width: 600px) {
-    --header-height: 54px;
-  }
 
   --container-width-xs: 20rem;
   --container-width-s: 30rem;
@@ -33,13 +32,9 @@
   --text-xl: 700 24px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
   --text-2xl: 700 30px/1.2 'FK Grotesk', 'Mona Sans', sans-serif;
   --text-3xl: 700 42px/1.15 'FK Grotesk', 'Mona Sans', sans-serif;
-
-  @media (max-width: 900px) {
-    --text-l: 700 16px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
-    --text-xl: 700 20px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
-    --text-2xl: 700 24px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
-    --text-3xl: 700 28px/1.2 'FK Grotesk', 'Mona Sans', sans-serif;
-  }
+  --text-hero-m: 500 56px/1.1 'FK Grotesk', 'Mona Sans', sans-serif;
+  --text-hero-l: 500 72px/1 'FK Grotesk', 'Mona Sans', sans-serif;
+  --text-hero-xl: 500 100px/1 'FK Grotesk', 'Mona Sans', sans-serif;
 
   --black: hsl(0, 0%, 0%);
   --blackA0: hsla(0, 0%, 0%, 0);
@@ -109,6 +104,7 @@
   --green10: hsla(150, 74%, 58%, 1);
   --green11: hsla(155, 66%, 32%, 1);
   --green12: hsla(150, 79%, 10%, 1);
+  --green-brand: #00ec97;
 
   --red1: hsla(6, 100%, 98%, 1);
   --red2: hsla(8, 100%, 97%, 1);
@@ -148,4 +144,27 @@
   --violet10: hsla(246, 57%, 61%, 1);
   --violet11: hsla(241, 50%, 32%, 1);
   --violet12: hsla(244, 49%, 17%, 1);
+  --violet-brand: #9797ff;
+
+  @media (max-width: 1000px) {
+    --gap-l: 1.5rem;
+    --gap-xl: 2rem;
+    --gap-2xl: 4rem;
+    --gap-3xl: 6rem;
+
+    --text-l: 700 16px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
+    --text-xl: 700 20px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
+    --text-2xl: 700 24px/1.3 'FK Grotesk', 'Mona Sans', sans-serif;
+    --text-3xl: 700 28px/1.2 'FK Grotesk', 'Mona Sans', sans-serif;
+    --text-hero-m: 500 36px/1.2 'FK Grotesk', 'Mona Sans', sans-serif;
+    --text-hero-l: 500 48px/1.2 'FK Grotesk', 'Mona Sans', sans-serif;
+    --text-hero-xl: 500 72px/1.2 'FK Grotesk', 'Mona Sans', sans-serif;
+  }
+
+  @media (max-width: 600px) {
+    --gap-2xl: 3rem;
+    --gap-3xl: 4rem;
+
+    --header-height: 54px;
+  }
 }

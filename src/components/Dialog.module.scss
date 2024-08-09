@@ -1,3 +1,5 @@
+@import '../styles/mixins/variables';
+
 .overlay {
   position: fixed;
   z-index: 1000;
@@ -19,7 +21,7 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     padding: var(--gap-s);
   }
 }
@@ -71,7 +73,7 @@
   background: var(--white);
   box-shadow: 0 0 var(--gap-m) var(--gap-xs) var(--white);
 
-  @media (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     margin-top: 0;
     padding: var(--gap-m);
   }
@@ -96,7 +98,7 @@
   gap: var(--gap-m);
   padding: var(--gap-m) var(--gap-l) var(--gap-l) var(--gap-l);
 
-  @media (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     padding: var(--gap-m);
     gap: var(--gap-m);
   }

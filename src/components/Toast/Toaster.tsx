@@ -6,8 +6,9 @@ import type { Toast, ToastType } from './store';
 import { useToasterStore } from './store';
 import * as T from './Toast';
 
-export function Toaster() {
-  const toaster = useToasterStore();
+export const Toaster = () => {
+  const close = useToasterStore((store) => store.close);
+  const toasts = useToasterStore((store) => store.toasts);
 
   const iconsByType: Record<ToastType, Icon> = {
     info: Info,
@@ -15,13 +16,13 @@ export function Toaster() {
     success: CheckCircle,
   };
 
-  function onOpenChange(open: boolean, toast: Toast) {
-    if (!open) toaster.close(toast);
-  }
+  const onOpenChange = (open: boolean, toast: Toast) => {
+    if (!open) close(toast);
+  };
 
   return (
     <T.Provider duration={5000}>
-      {toaster.toasts.map((toast) => {
+      {toasts.map((toast) => {
         const type = toast.type || 'info';
         const IconSvg = toast.icon || iconsByType[type];
 
@@ -60,4 +61,4 @@ export function Toaster() {
       <T.Viewport />
     </T.Provider>
   );
-}
+};

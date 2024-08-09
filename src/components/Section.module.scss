@@ -1,9 +1,17 @@
+@import '../styles/mixins/variables';
+
 .section {
   --section-padding-x: var(--gap-l);
   --section-padding-y: var(--gap-xl);
   padding: var(--section-padding-y) var(--section-padding-x);
   border-bottom: 1px solid var(--sand6);
+  background: var(--section-background-color);
 
+  &[data-padding='hero'] {
+    --section-padding-y: var(--gap-3xl);
+  }
+
+  &[data-background],
   &:last-child {
     border-bottom: none;
   }
@@ -28,8 +36,12 @@
     min-height: calc(100svh - var(--header-height));
   }
 
-  @media (max-width: 600px) {
-    --section-padding-x: var(--gap-m);
-    --section-padding-y: var(--gap-l);
-  }
+  // @media (max-width: $tabletBreakpointMaxWidth) {
+  //   --section-padding-x: var(--gap-m);
+  //   --section-padding-y: var(--gap-l);
+
+  //   &[data-padding='hero'] {
+  //     --section-padding-y: var(--gap-xl);
+  //   }
+  // }
 }

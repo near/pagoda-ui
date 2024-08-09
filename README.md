@@ -31,6 +31,13 @@ Please refer to `README.md` files in `src/components` for examples and documenta
 
 ## Contributing
 
+This project requires [pnpm](https://pnpm.io/installation) version `9.1.1`. The strict version requirement will help keep our lockfile consistent as more developers contribute. Make sure you have the correct version of `pnpm` installed:
+
+```bash
+pnpm -v # This should output 9.1.1
+npm install -g pnpm@9.1.1 # Install the correct version if needed
+```
+
 Run these commands to begin local development and watch for changes:
 
 ```bash
@@ -55,6 +62,16 @@ Follow these steps to preview local changes to the UI library within any project
 - Once you're done testing changes, make sure you revert the changes in your project's `package.json` and lock file so that you're no longer referencing the local file protocol (eg: `file:../pagoda-ui`).
 
 _NOTE: Due to this library having peer dependencies, `pnpm link` isn't compatible - that's why we have to rely on using `file:` instead._
+
+## Viewing Package Statistics
+
+After you've run `pnpm build` or `pnpm dev`, a `stats.html` file will be generated to show a visual breakdown of the size of the library based on source code and dependencies. You can open this in your browser by running:
+
+```bash
+open ./stats.html
+```
+
+This can be helpful to catch or debug a dependency that might have bloated the package size.
 
 ## Publishing a Release
 

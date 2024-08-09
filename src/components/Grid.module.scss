@@ -1,5 +1,6 @@
 @import '../styles/mixins/gap';
 @import '../styles/mixins/stack';
+@import '../styles/mixins/variables';
 
 .grid {
   display: grid;
@@ -50,11 +51,11 @@
     justify-content: space-evenly;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media (max-width: $tabletBreakpointMaxWidth) {
     grid-template-columns: var(--columns-tablet);
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: $phoneBreakpointMaxWidth) {
     grid-template-columns: var(--columns-phone);
   }
 }
