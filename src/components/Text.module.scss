@@ -1,6 +1,11 @@
 @import '../styles/mixins/variables';
 
 @mixin applyTextSize($selector) {
+  &[#{$selector}='text-hero-xl'] {
+    font: var(--text-hero-xl);
+    letter-spacing: -3px;
+    color: var(--sand12);
+  }
   &[#{$selector}='text-hero-l'] {
     font: var(--text-hero-l);
     letter-spacing: -3px;

@@ -24,6 +24,12 @@
   &[data-gap='xl'] {
     --gap: var(--gap-xl);
   }
+  &[data-gap='2xl'] {
+    --gap: var(--gap-2xl);
+  }
+  &[data-gap='3xl'] {
+    --gap: var(--gap-3xl);
+  }
 
   @media (max-width: $tabletBreakpointMaxWidth) {
     &[data-gap-tablet='none'] {
@@ -43,6 +49,12 @@
     }
     &[data-gap-tablet='xl'] {
       --gap: var(--gap-xl);
+    }
+    &[data-gap-tablet='2xl'] {
+      --gap: var(--gap-2xl);
+    }
+    &[data-gap-tablet='3xl'] {
+      --gap: var(--gap-3xl);
     }
   }
 
@@ -64,6 +76,12 @@
     }
     &[data-gap-phone='xl'] {
       --gap: var(--gap-xl);
+    }
+    &[data-gap-phone='2xl'] {
+      --gap: var(--gap-2xl);
+    }
+    &[data-gap-phone='3xl'] {
+      --gap: var(--gap-3xl);
     }
   }
 }

@@ -4,7 +4,7 @@ export type Stack = true | false | 'phone' | 'tablet';
 export type InputVariant = 'default' | 'success' | 'error';
 
 export type ThemeIconSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
-export type ThemeGap = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl';
+export type ThemeGap = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl';
 
 export type ThemeColor =
   | 'current'
@@ -26,7 +26,8 @@ export type ThemeFontSize =
   | 'text-2xl'
   | 'text-3xl'
   | 'text-hero-m'
-  | 'text-hero-l';
+  | 'text-hero-l'
+  | 'text-hero-xl';
 
 type ColorAmber =
   | 'amber1'
@@ -83,7 +84,8 @@ type ColorGreen =
   | 'green9'
   | 'green10'
   | 'green11'
-  | 'green12';
+  | 'green12'
+  | 'green-brand';
 
 type ColorRed =
   | 'red1'
@@ -125,7 +127,8 @@ type ColorViolet =
   | 'violet9'
   | 'violet10'
   | 'violet11'
-  | 'violet12';
+  | 'violet12'
+  | 'violet-brand';
 
 type ColorWhite =
   | 'white'

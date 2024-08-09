@@ -31,6 +31,13 @@ Please refer to `README.md` files in `src/components` for examples and documenta
 
 ## Contributing
 
+This project requires [pnpm](https://pnpm.io/installation) version `9.1.1`. The strict version requirement will help keep our lockfile consistent as more developers contribute. Make sure you have the correct version of `pnpm` installed:
+
+```bash
+pnpm -v # This should output 9.1.1
+npm install -g pnpm@9.1.1 # Install the correct version if needed
+```
+
 Run these commands to begin local development and watch for changes:
 
 ```bash
