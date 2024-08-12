@@ -50,3 +50,8 @@ export * from './utils/merge-refs';
 export * from './utils/number';
 export * from './utils/types';
 export * from './utils/unreachable';
+
+// Contexts
+
+import { PagodaUiContext } from './context/PagodaUi';
+export const PagodaUiProvider = PagodaUiContext.Provider;

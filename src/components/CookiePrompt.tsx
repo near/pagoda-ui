@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import { usePagodaUi } from '../context/PagodaUi';
 import { useCookiePreferences } from '../hooks/cookies';
 import { Button } from './Button';
 import s from './CookiePrompt.module.scss';
@@ -11,6 +10,7 @@ type Props = {
 
 export const CookiePrompt = ({ cookiePolicyUrl = '/cookies' }: Props) => {
   const { cookiesPreference, setCookiesPreference } = useCookiePreferences();
+  const { Link } = usePagodaUi();
 
   if (cookiesPreference) return null;
 

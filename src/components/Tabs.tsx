@@ -1,9 +1,9 @@
 import * as Primitive from '@radix-ui/react-tabs';
-import { useRouter } from 'next/router';
 import type { ComponentProps, ReactElement } from 'react';
 import { forwardRef } from 'react';
 import { useEffect, useRef } from 'react';
 
+import { usePagodaUi } from '../context/PagodaUi';
 import { mergeRefs } from '../utils/merge-refs';
 import s from './Tabs.module.scss';
 
@@ -39,13 +39,13 @@ Content.displayName = 'Content';
 
 export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({ children, href, iconLeft, ...props }, ref) => {
   const elementRef = useRef<HTMLButtonElement | null>(null);
-  const router = useRouter();
+  const { routerPush, routerPrefetch } = usePagodaUi();
 
   useEffect(() => {
     if (href) {
-      router.prefetch(href);
+      routerPrefetch(href);
     }
-  }, [href, router]);
+  }, [href, routerPrefetch]);
 
   useEffect(() => {
     function onClick(event: MouseEvent) {
@@ -53,7 +53,7 @@ export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({ children, 
         if (event.metaKey || event.ctrlKey) {
           window.open(href, '_blank');
         } else {
-          router.push(href);
+          routerPush(href);
         }
       }
     }
@@ -64,7 +64,7 @@ export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({ children, 
     return () => {
       el?.removeEventListener('click', onClick);
     };
-  }, [href, router]);
+  }, [href, routerPush]);
 
   return (
     <Primitive.Trigger className={s.trigger} ref={mergeRefs([ref, elementRef])} {...props}>

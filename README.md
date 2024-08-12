@@ -6,24 +6,49 @@ A React component library that implements the official design system of NEAR and
 
 **React 18**
 
-**Next JS >=13** - Some of our components rely on `next/link` and hooks like `router.push()`. We'll look into refactoring the library soon to remove the Next JS requirement so that our library can be used within any React framework.
-
 **Zustand 4** - Our `openToast()` method is able to work in any context due to relying on a Zustand global store.
 
 ## Installation & Setup
 
 ```bash
-pnpm add zustand next
+pnpm add zustand
 pnpm add @near-pagoda/ui
 ```
 
-In your `_app.tsx` file, you'll need to import the following CSS files:
+In your `_app.tsx` file, import the following CSS files in order:
 
 ```tsx
 import '@near-pagoda/ui/globals.css';
 import '@near-pagoda/ui/theme.css';
 import '@near-pagoda/ui/lib.css';
 ```
+
+Wrap your application with the `<PagodaUiProvider>` to pass in your framework's `<Link>` component and router methods. You'll also want to include the `<Toaster />` component to display toasts when calling `openToast()`:
+
+```tsx
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { PagodaUiProvider, Toaster } from '@near-pagoda/ui';
+
+...
+
+const router = useRouter();
+
+...
+
+<PagodaUiProvider
+  value={{
+    routerPrefetch: router.prefetch,
+    routerPush: router.push,
+    Link,
+  }}
+>
+  ...
+  <Toaster />
+</PagodaUiProvider>
+```
+
+Why is `<PagodaUiProvider>` needed? Some of our components render anchor tags or dynamically change the current route. This provider allows our library to support any React framework (Vanilla/Vite, Next JS, etc) by passing in your router's components.
 
 ## Documentation
 
