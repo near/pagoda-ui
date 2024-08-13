@@ -1,8 +1,8 @@
 import { CaretCircleDown, CaretCircleUp } from '@phosphor-icons/react';
-import Link from 'next/link';
 import type { ComponentPropsWithRef, HTMLAttributeAnchorTarget, KeyboardEventHandler, ReactNode } from 'react';
 import { forwardRef } from 'react';
 
+import { usePagodaUi } from '../context/PagodaUi';
 import { Flex } from './Flex';
 import { Placeholder } from './Placeholder';
 import { SvgIcon } from './SvgIcon';
@@ -142,6 +142,7 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
     const isButton = !!props.onClick && !href;
     const role = isButton ? 'button' : undefined;
     const tabIndex = isButton ? (disabled ? -1 : 0) : undefined;
+    const { Link } = usePagodaUi();
 
     const onKeyDown: KeyboardEventHandler<HTMLTableCellElement> = (event) => {
       if (event.key === 'Enter') {

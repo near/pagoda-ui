@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import type { ComponentPropsWithRef, ReactElement } from 'react';
 import { forwardRef } from 'react';
 
+import { usePagodaUi } from '../context/PagodaUi';
 import s from './Button.module.scss';
 
 type Fill = 'solid' | 'outline' | 'ghost';
@@ -40,6 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
     },
     ref,
   ) => {
+    const { Link } = usePagodaUi();
     const conditionalAttributes: Record<string, unknown> = href
       ? {
           href,

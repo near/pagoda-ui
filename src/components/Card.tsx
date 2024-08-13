@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { type ComponentPropsWithRef, forwardRef } from 'react';
 
+import { usePagodaUi } from '../context/PagodaUi';
 import { ThemeColor } from '../utils/types';
 import s from './Card.module.scss';
 
@@ -15,6 +15,7 @@ type Props = ComponentPropsWithRef<'div'> & {
 
 export const Card = forwardRef<HTMLDivElement, Props>(
   ({ background = 'white', border = 'white', className = '', gap, padding, style, ...props }, ref) => {
+    const { Link } = usePagodaUi();
     const Element: any = props.href ? Link : 'div';
 
     return (

@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { ComponentProps, ReactNode } from 'react';
 
+import { usePagodaUi } from '../context/PagodaUi';
 import s from './Article.module.scss';
 
 type Props = {
@@ -12,6 +12,8 @@ type Props = {
 };
 
 export const Article = ({ alt, src, children, ...props }: Props) => {
+  const { Link } = usePagodaUi();
+
   return (
     <Link className={s.article} {...props}>
       <div className={s.image}>
