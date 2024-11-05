@@ -1,3 +1,5 @@
+'use client';
+
 import * as Primitive from '@radix-ui/react-tooltip';
 import type { ComponentProps, ReactElement, ReactNode } from 'react';
 
@@ -24,11 +26,16 @@ export const Tooltip = ({
   sideOffset = 6,
   ...props
 }: Props) => {
-  const delayDuration = root?.delayDuration || 200;
+  const delayDuration = root?.delayDuration ?? 200;
 
   return (
     <Primitive.Provider>
-      <Primitive.Root delayDuration={delayDuration} open={disabled ? false : undefined} {...root}>
+      <Primitive.Root
+        delayDuration={delayDuration}
+        open={disabled ? false : undefined}
+        disableHoverableContent
+        {...root}
+      >
         <Primitive.Trigger className={asChild ? undefined : s.trigger} asChild={asChild} type="button">
           {children}
         </Primitive.Trigger>

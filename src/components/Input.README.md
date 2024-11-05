@@ -1,7 +1,7 @@
 # Input
 
 ```tsx
-import { Input } from '@near-pagoda/ui';
+import { Input } from '~/components/lib/Input';
 
 ...
 

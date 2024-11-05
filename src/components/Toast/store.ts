@@ -1,4 +1,4 @@
-import { Icon } from '@phosphor-icons/react';
+import { type Icon } from '@phosphor-icons/react';
 import { create } from 'zustand';
 
 export type ToastType = 'info' | 'error' | 'success';
@@ -73,8 +73,8 @@ export const useToasterStore = create<ToasterStore>((set) => ({
     const newToast = {
       ...options,
       isOpen: true,
-      id: options.id || Date.now().toString(),
-      type: options.type || 'info',
+      id: options.id ?? Date.now().toString(),
+      type: options.type ?? 'info',
     };
 
     set((state) => {

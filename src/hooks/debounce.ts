@@ -4,11 +4,11 @@ import debounce from 'lodash-es/debounce';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 export function useDebouncedFunction<T = void>(
-  callback: T extends void ? () => any : (argument: T) => any,
+  callback: T extends void ? () => unknown : (argument: T) => unknown,
   delay: number,
   leading = false,
 ) {
-  const ref = useRef<(argument: T) => any>();
+  const ref = useRef<(argument: T) => unknown>();
 
   useEffect(() => {
     ref.current = callback;

@@ -1,0 +1,18 @@
+.iframeWrapper {
+  width: 100%;
+  position: relative;
+  flex-grow: 1;
+}
+
+.iframe {
+  border: none;
+  width: 100%;
+  min-height: 100%;
+  box-shadow: var(--shadow-card-with-outline);
+  outline: none;
+  transition: opacity 300ms;
+
+  &[data-loading='true'] {
+    opacity: 0;
+  }
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import { X } from '@phosphor-icons/react';
 import * as Primitive from '@radix-ui/react-toast';
 import type { ComponentProps, ReactElement } from 'react';
@@ -5,7 +7,7 @@ import { forwardRef } from 'react';
 
 import { Button } from '../Button';
 import { SvgIcon } from '../SvgIcon';
-import { ToastType } from './store';
+import { type ToastType } from './store';
 import s from './Toast.module.scss';
 
 type ViewportProps = ComponentProps<typeof Primitive.Viewport>;

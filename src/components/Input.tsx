@@ -1,10 +1,12 @@
+'use client';
+
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import type { ComponentPropsWithRef, FormEventHandler, ReactElement } from 'react';
 import { forwardRef } from 'react';
 
 import type { NumberInputHandlerOptions } from '../utils/input-handlers';
 import { numberInputHandler } from '../utils/input-handlers';
-import { InputVariant } from '../utils/types';
+import { type ThemeInputVariant } from '../utils/theme';
 import { AssistiveText } from './AssistiveText';
 import s from './Input.module.scss';
 
@@ -44,7 +46,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
   ) => {
     const isNumber = Boolean(number);
     const assistiveTextId = `${name}-assistive-text`;
-    const variant: InputVariant = error ? 'error' : success ? 'success' : 'default';
+    const variant: ThemeInputVariant = error ? 'error' : success ? 'success' : 'default';
 
     if (type === 'search' && !iconLeft) {
       iconLeft = <MagnifyingGlass weight="bold" />;
@@ -105,7 +107,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             )}
           </div>
 
-          <AssistiveText variant={variant} message={error || success || assistive} id={assistiveTextId} />
+          <AssistiveText variant={variant} message={error ?? success ?? assistive} id={assistiveTextId} />
         </label>
       </div>
     );

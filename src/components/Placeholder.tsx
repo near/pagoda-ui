@@ -1,9 +1,9 @@
-import { CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 
 import { Card } from './Card';
-import { Container } from './Container';
+import { Flex } from './Flex';
 import s from './Placeholder.module.scss';
-import { Section, SectionProps } from './Section';
+import { Section, type SectionProps } from './Section';
 
 type Props = {
   style?: CSSProperties;
@@ -13,27 +13,32 @@ export const Placeholder = (props: Props) => {
   return <span className={s.placeholder} {...props} />;
 };
 
+export const PlaceholderStack = (props: Props) => {
+  return (
+    <Flex direction="column" gap="s" {...props}>
+      <Placeholder />
+      <Placeholder />
+      <Placeholder style={{ width: '75%' }} />
+    </Flex>
+  );
+};
+
 export const PlaceholderCard = (props: Props) => {
   return (
-    <Card {...props}>
+    <Card gap="s" {...props}>
       <Placeholder />
       <Placeholder />
-      <Placeholder style={{ width: '70%' }} />
+      <Placeholder style={{ width: '75%' }} />
     </Card>
   );
 };
 
 export const PlaceholderSection = (props: SectionProps) => {
   return (
-    <Section grow="available" {...props}>
-      <Container
-        size="s"
-        style={{
-          margin: 'auto',
-        }}
-      >
-        <PlaceholderCard />
-      </Container>
+    <Section {...props} gap="s" bleed>
+      <Placeholder />
+      <Placeholder />
+      <Placeholder style={{ width: '75%' }} />
     </Section>
   );
 };

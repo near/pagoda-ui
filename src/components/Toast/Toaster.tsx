@@ -1,4 +1,6 @@
-import { CheckCircle, Icon, Info, Warning } from '@phosphor-icons/react';
+'use client';
+
+import { CheckCircle, type Icon, Info, Warning } from '@phosphor-icons/react';
 
 import { Button } from '../Button';
 import { Flex } from '../Flex';
@@ -23,8 +25,8 @@ export const Toaster = () => {
   return (
     <T.Provider duration={5000}>
       {toasts.map((toast) => {
-        const type = toast.type || 'info';
-        const IconSvg = toast.icon || iconsByType[type];
+        const type = toast.type ?? 'info';
+        const IconSvg = toast.icon ?? iconsByType[type];
 
         return (
           <T.Root
@@ -36,7 +38,7 @@ export const Toaster = () => {
           >
             <T.Icon icon={<IconSvg weight="bold" />} />
 
-            <Flex stack gap="xs">
+            <Flex direction="column" gap="xs">
               {toast.title && <T.Title>{toast.title}</T.Title>}
               {toast.description && <T.Description>{toast.description}</T.Description>}
             </Flex>

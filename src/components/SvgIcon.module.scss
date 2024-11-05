@@ -23,9 +23,9 @@
     }
   }
 
-  &[data-size='xxs'] {
-    width: var(--icon-size-xxs);
-    height: var(--icon-size-xxs);
+  &[data-size='2xs'] {
+    width: var(--icon-size-2xs);
+    height: var(--icon-size-2xs);
   }
   &[data-size='xs'] {
     width: var(--icon-size-xs);

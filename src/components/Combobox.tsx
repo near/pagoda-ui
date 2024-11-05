@@ -1,3 +1,5 @@
+'use client';
+
 import { CaretDown, CheckCircle, Circle } from '@phosphor-icons/react';
 import { useCombobox } from 'downshift';
 import type { CSSProperties, FocusEventHandler, ReactElement } from 'react';
@@ -13,7 +15,7 @@ import { Input } from './Input';
 import { SvgIcon } from './SvgIcon';
 import { Text } from './Text';
 
-export type ComboboxItem = {
+export type ComboboxOption = {
   hidden?: boolean;
   label?: string;
   value: string | number;
@@ -25,12 +27,12 @@ type BaseProps = {
   assistive?: string;
   error?: string;
   icon?: ReactElement;
-  items: ComboboxItem[];
+  items: ComboboxOption[];
   label?: string;
   maxDropdownHeight?: string;
   name: string;
   noneLabel?: string;
-  onBlur?: (event: any) => void;
+  onBlur?: (event: unknown) => void;
   placeholder?: string;
   style?: CSSProperties;
   success?: string;
@@ -40,12 +42,12 @@ type ConditionalProps =
   | {
       value: number | null | undefined;
       number: true;
-      onChange: (value: number | null) => any;
+      onChange: (value: number | null) => unknown;
     }
   | {
       value: string | null | undefined;
       number?: never;
-      onChange: (value: string | null) => any;
+      onChange: (value: string | null) => unknown;
     };
 
 type Props = BaseProps & ConditionalProps;
@@ -53,7 +55,10 @@ type Props = BaseProps & ConditionalProps;
 export const Combobox = forwardRef<HTMLInputElement, Props>(
   ({ allowCustomInput, allowNone, noneLabel, ...props }, ref) => {
     const noneItem = useMemo(() => {
-      const item: ComboboxItem = { label: noneLabel || 'None', value: '__NONE__' };
+      const item: ComboboxOption = {
+        label: noneLabel ?? 'None',
+        value: '__NONE__',
+      };
       return item;
     }, [noneLabel]);
 
@@ -210,9 +215,9 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
                       {...combobox.getItemProps({ item, index })}
                     >
                       {combobox.selectedItem?.value === item.value ? (
-                        <SvgIcon icon={<CheckCircle weight="duotone" />} color="green8" />
+                        <SvgIcon icon={<CheckCircle weight="duotone" />} color="green-9" />
                       ) : (
-                        <SvgIcon icon={<Circle weight="duotone" />} color="sand10" />
+                        <SvgIcon icon={<Circle weight="duotone" />} color="sand-10" />
                       )}
 
                       {item.label ?? item.value}
