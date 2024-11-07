@@ -52,14 +52,15 @@ export const Item = forwardRef<
   HTMLDivElement,
   ComponentProps<typeof Primitive.Item> & { external?: boolean; href?: string }
 >(({ external, href, ...props }, ref) => {
-  const { routerPush } = usePagodaUi();
+  const { useRouter } = usePagodaUi();
+  const router = useRouter();
 
   const onClick: MouseEventHandler = (event) => {
     if (href) {
       if (event.metaKey || external) {
         window.open(href, '_blank');
       } else {
-        void routerPush(href);
+        void router.push(href);
       }
     }
   };

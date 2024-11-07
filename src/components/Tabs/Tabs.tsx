@@ -41,13 +41,14 @@ Content.displayName = 'Content';
 
 export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({ children, href, iconLeft, ...props }, ref) => {
   const elementRef = useRef<HTMLButtonElement | null>(null);
-  const { routerPush, routerPrefetch } = usePagodaUi();
+  const { useRouter } = usePagodaUi();
+  const router = useRouter();
 
   useEffect(() => {
     if (href) {
-      void routerPrefetch(href);
+      void router.prefetch(href);
     }
-  }, [href, routerPrefetch]);
+  }, [href, router]);
 
   useEffect(() => {
     function clickListener(event: MouseEvent) {
@@ -55,7 +56,7 @@ export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({ children, 
         if (event.metaKey || event.ctrlKey) {
           window.open(href, '_blank');
         } else {
-          void routerPush(href);
+          void router.push(href);
         }
       }
     }
@@ -66,7 +67,7 @@ export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({ children, 
     return () => {
       el?.removeEventListener('click', clickListener);
     };
-  }, [href, routerPush]);
+  }, [href, router]);
 
   return (
     <Primitive.Trigger className={s.trigger} ref={mergeRefs([ref, elementRef])} {...props}>

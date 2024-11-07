@@ -9,8 +9,10 @@ type PagodaUi = {
     target?: ComponentProps<'a'>['target'];
     ref?: ForwardedRef<HTMLAnchorElement>;
   }) => ReactNode;
-  routerPrefetch: (path: string) => any;
-  routerPush: (path: string) => any;
+  useRouter: () => {
+    prefetch: (path: string) => any;
+    push: (path: string) => any;
+  };
 };
 
 export const PagodaUiContext = createContext<PagodaUi | null>(null);

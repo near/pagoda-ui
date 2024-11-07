@@ -18,6 +18,8 @@ pnpm add @near-pagoda/ui
 In your root `layout.tsx` file, wrap your application with the `<PagodaUiProvider>` and pass in your framework's `<Link>` component and router methods. You'll also want to include the `<Toaster />` component to display toasts when calling `openToast()`.
 
 ```tsx
+'use client';
+
 import '@near-pagoda/ui/styles.css';
 
 import Link from 'next/link';
@@ -30,8 +32,6 @@ import { PagodaUiProvider, Toaster } from '@near-pagoda/ui';
 */
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const router = useRouter();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -45,8 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PagodaUiProvider
           value={{
             Link,
-            routerPrefetch: router.prefetch,
-            routerPush: router.push
+            useRouter
           }}
         >
           <Toaster />
@@ -58,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 }
 ```
 
-Why is `<PagodaUiProvider>` needed? Some of our components render anchor tags or dynamically change the current route. This provider allows our library to support any React framework (Vanilla/Vite, Next JS, etc) by passing in your router's components. It also supports dark/light mode and opts into the user's preferred theme via [next-theme](ttps://github.com/pacocoursey/next-themes).
+Why is `<PagodaUiProvider>` needed? Some of our components render anchor tags or dynamically change the current route. This provider allows our library to support any React framework (Vanilla/Vite, Next JS, etc) by passing in your router's components and hooks. It also supports dark/light mode and opts into the user's preferred theme via [next-theme](ttps://github.com/pacocoursey/next-themes).
 
 ## Documentation
 

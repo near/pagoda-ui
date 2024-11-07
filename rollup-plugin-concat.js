@@ -9,6 +9,7 @@ function concat(options = {}) {
 
     writeBundle() {
       let code = '';
+      let exit = false;
 
       for (const file of options.files) {
         const filePath = path.resolve(process.cwd(), file);
@@ -16,8 +17,12 @@ function concat(options = {}) {
           const content = fs.readFileSync(filePath, 'utf8');
           fs.unlinkSync(filePath);
           code += `${content}\n`;
+        } else {
+          exit = true;
         }
       }
+
+      if (exit) return;
 
       writeFileWithDirs(outputPath, code);
     },
