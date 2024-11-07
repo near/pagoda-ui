@@ -1,7 +1,8 @@
 # Checkbox
 
 ```tsx
-import { Checkbox, Flex } from '@near-pagoda/ui';
+import { Checkbox } from '~/components/lib/Checkbox';
+import { Flex } from '~/components/lib/Flex';
 
 ...
 
@@ -14,7 +15,8 @@ import { Checkbox, Flex } from '@near-pagoda/ui';
 ## Checkbox Group
 
 ```tsx
-import { Checkbox, CheckboxGroup, Flex } from '@near-pagoda/ui';
+import { Checkbox, CheckboxGroup } from '~/components/lib/Checkbox';
+import { Flex } from '~/components/lib/Flex';
 
 ...
 
@@ -36,9 +38,8 @@ import { Checkbox, CheckboxGroup, Flex } from '@near-pagoda/ui';
 To switch from checkboxes to radios, simply apply `type="radio"` to each `<Checkbox />` component (and make sure they have matching `name` attributes):
 
 ```tsx
-import { Checkbox, CheckboxGroup, Flex } from '@near-pagoda/ui';
-
-...
+import { Checkbox, CheckboxGroup } from '~/components/lib/Checkbox';
+import { Flex } from '~/components/lib/Flex';
 
 <CheckboxGroup aria-label="My Radio Group">
   <Flex as="label" align="center" gap="s">
@@ -50,5 +51,5 @@ import { Checkbox, CheckboxGroup, Flex } from '@near-pagoda/ui';
     <Checkbox type="radio" name="myRadio" value="2" />
     My Radio 2
   </Flex>
-</CheckboxGroup>
+</CheckboxGroup>;
 ```

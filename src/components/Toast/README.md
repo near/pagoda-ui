@@ -9,7 +9,7 @@ The `openToast()` API is made possible with Zustand: https://github.com/pmndrs/z
 Using the `openToast` API allows you to easily open a toast from any context:
 
 ```tsx
-import { openToast } from '@near-pagoda/ui';
+import { openToast } from '~/components/lib/Toast';
 
 ...
 

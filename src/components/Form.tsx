@@ -1,11 +1,26 @@
-import { ComponentPropsWithRef, forwardRef } from 'react';
+import { type ComponentPropsWithRef, forwardRef } from 'react';
 
-type Props = ComponentPropsWithRef<'form'>;
+import s from './Form.module.scss';
+
+type Props = ComponentPropsWithRef<'form'> & {
+  stretch?: boolean;
+};
 
 export const Form = forwardRef<HTMLFormElement, Props>(
-  ({ autoCapitalize = 'off', autoCorrect = 'off', children, noValidate = true, ...props }, ref) => {
+  (
+    { autoCapitalize = 'off', autoCorrect = 'off', children, className = '', noValidate = true, stretch, ...props },
+    ref,
+  ) => {
     return (
-      <form noValidate={noValidate} autoCapitalize={autoCapitalize} autoCorrect={autoCorrect} ref={ref} {...props}>
+      <form
+        noValidate={noValidate}
+        autoCapitalize={autoCapitalize}
+        autoCorrect={autoCorrect}
+        data-stretch={stretch}
+        ref={ref}
+        className={`${s.form} ${className}`}
+        {...props}
+      >
         {children}
       </form>
     );

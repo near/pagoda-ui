@@ -1,6 +1,6 @@
 .card {
-  --card-background-color: var(--white);
-  --card-border-color: var(--white);
+  --card-background-color: var(--sand-0);
+  --card-border-color: var(--sand-0);
 
   display: flex;
   flex-direction: column;
@@ -11,14 +11,49 @@
   background-color: var(--card-background-color);
   border: 1px solid var(--card-border-color);
   outline: none;
-  transition: all var(--transition-speed);
+  position: relative;
+  transition: var(--transitions);
 
+  * {
+    min-width: 0;
+  }
+
+  &[data-padding='s'] {
+    padding: var(--gap-s);
+  }
+  &[data-padding='m'] {
+    padding: var(--gap-m);
+  }
   &[data-padding='l'] {
     padding: var(--gap-l);
   }
 
+  &[data-padding-inline='s'] {
+    padding-inline: var(--gap-s);
+  }
+  &[data-padding-inline='m'] {
+    padding-inline: var(--gap-m);
+  }
+  &[data-padding-inline='l'] {
+    padding-inline: var(--gap-l);
+  }
+
+  &[data-gap='xs'] {
+    gap: var(--gap-xs);
+  }
+  &[data-gap='s'] {
+    gap: var(--gap-s);
+  }
+  &[data-gap='m'] {
+    gap: var(--gap-m);
+  }
   &[data-gap='l'] {
     gap: var(--gap-l);
+  }
+
+  &:hover,
+  &:focus {
+    z-index: 5;
   }
 
   &[role='button'],
@@ -26,21 +61,33 @@
     cursor: pointer;
 
     &:hover {
-      box-shadow: 0px 1px 10px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.075);
 
       &[data-background='black'],
-      &[data-background='sand12'] {
-        --card-background-color: var(--whiteA4) !important;
+      &[data-background='sand-12'] {
+        --card-background-color: var(--white-A4) !important;
       }
     }
-    &:focus {
-      box-shadow: 0 0 0 4px var(--violet4);
+    &:focus-visible {
+      box-shadow: 0 0 0 4px var(--violet-5);
+      border-color: var(--violet-9);
     }
   }
 
-  :global(.html2canvas) & {
-    box-shadow: none;
-    border: 1px solid var(--sand8);
+  &[data-animate-in='true'] {
+    opacity: 0;
+    animation: animateIn 500ms forwards;
+
+    @keyframes animateIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95, 0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
+    }
   }
 }
 
@@ -56,5 +103,32 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: var(--shadow-card);
+
+  .card {
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: -1px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:first-child {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
   }
 }

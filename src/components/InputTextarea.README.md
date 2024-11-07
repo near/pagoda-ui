@@ -1,7 +1,7 @@
 # Input Textarea
 
 ```tsx
-import { InputTextarea } from '@near-pagoda/ui';
+import { InputTextarea } from '~/components/lib/InputTextarea';
 
 ...
 

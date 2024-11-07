@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactElement } from 'react';
 
-import type { ThemeColor, ThemeIconSize } from '../utils/types';
+import type { ThemeColor, ThemeIconSize } from '../utils/theme';
 import s from './SvgIcon.module.scss';
 
 type Props = {

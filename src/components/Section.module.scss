@@ -1,14 +1,17 @@
-@import '../styles/mixins/variables';
-
 .section {
   --section-padding-x: var(--gap-l);
-  --section-padding-y: var(--gap-xl);
+  --section-padding-y: var(--gap-l);
   padding: var(--section-padding-y) var(--section-padding-x);
-  border-bottom: 1px solid var(--sand6);
+  border-bottom: 1px solid var(--sand-4);
   background: var(--section-background-color);
 
   &[data-padding='hero'] {
     --section-padding-y: var(--gap-3xl);
+  }
+
+  &[data-padding='none'] {
+    --section-padding-y: 0;
+    --section-padding-x: 0;
   }
 
   &[data-background],
@@ -17,7 +20,7 @@
   }
 
   &[data-background='primary-gradient'] {
-    background: linear-gradient(to bottom right, var(--violet4), var(--cyan3));
+    background: linear-gradient(to bottom right, var(--violet-5), var(--cyan-3));
   }
 
   &[data-grow] {
@@ -33,15 +36,17 @@
     }
   }
   &[data-grow='screen-height'] {
-    min-height: calc(100svh - var(--header-height));
+    min-height: var(--section-fill-height);
   }
 
-  // @media (max-width: $tabletBreakpointMaxWidth) {
-  //   --section-padding-x: var(--gap-m);
-  //   --section-padding-y: var(--gap-l);
+  &[data-tabs='true'] {
+    padding-bottom: 0 !important;
 
-  //   &[data-padding='hero'] {
-  //     --section-padding-y: var(--gap-xl);
-  //   }
-  // }
+    [role='tablist'] {
+      margin-inline: calc(var(--section-padding-x) * -1);
+      padding-inline: var(--section-padding-x);
+      width: unset;
+      flex-grow: 1;
+    }
+  }
 }

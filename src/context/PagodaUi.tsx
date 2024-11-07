@@ -1,17 +1,29 @@
-import { type ComponentProps, createContext, type ReactNode, useContext } from 'react';
+import { ThemeProvider } from 'next-themes';
+import { type ComponentProps, createContext, ForwardedRef, type ReactNode, useContext } from 'react';
 
 type PagodaUi = {
-  routerPrefetch: (path: string) => any;
-  routerPush: (path: string) => any;
   Link: (props: {
     children: ReactNode;
     className?: string;
     href: string;
     target?: ComponentProps<'a'>['target'];
+    ref?: ForwardedRef<HTMLAnchorElement>;
   }) => ReactNode;
+  useRouter: () => {
+    prefetch: (path: string) => any;
+    push: (path: string) => any;
+  };
 };
 
 export const PagodaUiContext = createContext<PagodaUi | null>(null);
+
+export const PagodaUiProvider = ({ value, children }: ComponentProps<typeof PagodaUiContext.Provider>) => {
+  return (
+    <ThemeProvider attribute="class">
+      <PagodaUiContext.Provider value={value}>{children}</PagodaUiContext.Provider>
+    </ThemeProvider>
+  );
+};
 
 export function usePagodaUi() {
   const pagodaUi = useContext(PagodaUiContext);

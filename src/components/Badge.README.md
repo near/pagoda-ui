@@ -1,7 +1,7 @@
 # Badge
 
 ```tsx
-import { Badge } from '@near-pagoda/ui';
+import { Badge } from '~/components/lib/Badge';
 
 ...
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { FileArrowUp, Paperclip } from '@phosphor-icons/react';
 import type { ChangeEventHandler, CSSProperties, DragEventHandler, FocusEventHandler } from 'react';
 import { forwardRef, useState } from 'react';
@@ -20,7 +22,7 @@ type Props = {
   multiple?: boolean;
   name: string;
   onBlur?: FocusEventHandler<HTMLInputElement>;
-  onChange: (value: File[] | null) => any;
+  onChange: (value: File[] | null) => unknown;
   style?: CSSProperties;
   value?: File[] | null | undefined;
 };
@@ -92,7 +94,7 @@ export const FileInput = forwardRef<HTMLInputElement, Props>(
       setIsDragging(true);
     };
 
-    const onDrop: DragEventHandler<HTMLLabelElement> = async (event) => {
+    const onDrop: DragEventHandler<HTMLLabelElement> = (event) => {
       event.preventDefault();
       setIsDragging(false);
       handleFileListChange(event.dataTransfer.files);
@@ -133,7 +135,7 @@ export const FileInput = forwardRef<HTMLInputElement, Props>(
                   {file.type.includes('image/') && <img src={URL.createObjectURL(file)} alt={file.name} />}
 
                   <div className={s.filename}>
-                    <SvgIcon icon={<Paperclip />} size="xs" color="sand10" />
+                    <SvgIcon icon={<Paperclip />} size="xs" color="sand-10" />
                     <Text size="text-xs">{file.name}</Text>
                   </div>
                 </div>
@@ -142,8 +144,8 @@ export const FileInput = forwardRef<HTMLInputElement, Props>(
           )}
 
           <div className={s.cta}>
-            <SvgIcon icon={<FileArrowUp />} color="violet8" />
-            <Text size="text-s" color="sand12">
+            <SvgIcon icon={<FileArrowUp />} color="violet-10" />
+            <Text size="text-s" color="sand-12">
               Select or drag & drop {multiple ? 'files' : 'file'}
             </Text>
           </div>

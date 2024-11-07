@@ -1,27 +1,34 @@
+'use client';
+
 import type { ComponentPropsWithRef, ReactElement, ReactNode } from 'react';
 import { forwardRef } from 'react';
 
 import s from './Badge.module.scss';
 
-type Variant = 'neutral' | 'primary' | 'warning' | 'success' | 'alert';
+type Variant = 'neutral' | 'neutral-alpha' | 'primary' | 'warning' | 'success' | 'alert';
 
 type Props = Omit<ComponentPropsWithRef<'span'>, 'children'> & {
+  button?: boolean;
   count?: boolean;
   iconLeft?: ReactElement;
   label: ReactNode;
+  size?: 'small' | 'default';
   variant?: Variant;
   iconRight?: ReactElement;
 };
 
 export const Badge = forwardRef<HTMLSpanElement, Props>(
-  ({ className = '', count, label, iconLeft, iconRight, variant = 'primary', ...props }, ref) => {
+  ({ button, className = '', count, label, iconLeft, iconRight, size, variant = 'primary', ...props }, ref) => {
+    const isButton = button ?? !!props.onClick;
+
     return (
       <span
         className={`${s.badge} ${className}`}
         data-count={count}
+        data-size={size}
         data-variant={variant}
-        role={props.onClick ? 'button' : undefined}
-        tabIndex={props.tabIndex || props.onClick ? 0 : undefined}
+        role={isButton ? 'button' : undefined}
+        tabIndex={(props.tabIndex ?? isButton) ? 0 : undefined}
         ref={ref}
         {...props}
       >

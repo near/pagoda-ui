@@ -1,13 +1,13 @@
 import { CheckCircle, WarningCircle } from '@phosphor-icons/react';
 
-import { InputVariant } from '../utils/types';
+import { type ThemeInputVariant } from '../utils/theme';
 import { Flex } from './Flex';
 import { SvgIcon } from './SvgIcon';
 import { Text } from './Text';
 
 type Props = {
   message?: string;
-  variant: InputVariant;
+  variant: ThemeInputVariant;
   id?: string;
 };
 
@@ -17,8 +17,8 @@ export const AssistiveText = ({ message, variant, id }: Props) => {
   if (variant === 'error') {
     return (
       <Flex gap="xs" align="center">
-        <SvgIcon icon={<WarningCircle weight="bold" />} color="red8" size="xs" />
-        <Text color="red11" size="text-xs" id={id}>
+        <SvgIcon icon={<WarningCircle weight="bold" />} color="red-9" size="xs" />
+        <Text color="red-11" size="text-xs" id={id}>
           {message}
         </Text>
       </Flex>
@@ -26,15 +26,15 @@ export const AssistiveText = ({ message, variant, id }: Props) => {
   } else if (variant === 'success') {
     return (
       <Flex gap="xs" align="center">
-        <SvgIcon icon={<CheckCircle weight="bold" />} color="green8" size="xs" />
-        <Text color="green11" size="text-xs" id={id}>
+        <SvgIcon icon={<CheckCircle weight="bold" />} color="green-9" size="xs" />
+        <Text color="green-11" size="text-xs" id={id}>
           {message}
         </Text>
       </Flex>
     );
   } else {
     return (
-      <Text color="sand11" size="text-xs" id={id}>
+      <Text color="sand-11" size="text-xs" id={id}>
         {message}
       </Text>
     );

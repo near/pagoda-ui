@@ -1,54 +1,49 @@
 import type { CSSProperties, ReactNode } from 'react';
 
-import type { Align, Justify, ThemeGap } from '../utils/types';
+import { breakpointPropToCss, type ThemeBreakpointProps, type ThemeGap } from '../utils/theme';
 import s from './Grid.module.scss';
 
 type Props = {
-  align?: Align;
   children: ReactNode;
-  columns: string;
-  columnsPhone?: string;
-  columnsTablet?: string;
-  gap?: ThemeGap;
-  gapPhone?: ThemeGap;
-  gapTablet?: ThemeGap;
-  justify?: Justify;
-  stretch?: boolean;
+  className?: string;
+  id?: string;
   style?: CSSProperties;
-};
+} & ThemeBreakpointProps<{
+  align?: CSSProperties['alignItems'];
+  columns?: CSSProperties['gridTemplateColumns'];
+  gap?: ThemeGap;
+  justify?: CSSProperties['justifyContent'];
+}>;
 
 export const Grid = ({
-  align,
   children,
+  className = '',
+  style,
+
+  align,
   columns,
-  columnsPhone,
-  columnsTablet,
-  gap = 'm',
-  gapPhone,
-  gapTablet,
+  gap,
   justify,
-  stretch,
-  style: styleOverrides,
+  phone,
+  tablet,
+
   ...props
 }: Props) => {
-  const style = {
-    '--columns': columns,
-    '--columns-tablet': columnsTablet || columns,
-    '--columns-phone': columnsPhone || columnsTablet || columns,
-  } as any;
+  const breakpointProps = { align, columns, gap, justify, phone, tablet };
+
+  const variables = {
+    ...breakpointPropToCss(breakpointProps, 'align', 'grid-align'),
+    ...breakpointPropToCss(breakpointProps, 'columns', 'grid-columns'),
+    ...breakpointPropToCss(breakpointProps, 'gap', 'grid-gap', true),
+    ...breakpointPropToCss(breakpointProps, 'justify', 'grid-justify'),
+  };
 
   return (
     <div
-      className={s.grid}
-      data-align={align}
-      data-gap={gap}
-      data-gap-phone={gapPhone}
-      data-gap-tablet={gapTablet}
-      data-justify={justify}
-      data-stretch={stretch}
+      className={`${s.grid} ${className}`}
       style={{
-        ...styleOverrides,
         ...style,
+        ...variables,
       }}
       {...props}
     >

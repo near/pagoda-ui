@@ -5,21 +5,22 @@ This component helps solve common flex layout requirements. If you need a more s
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 ```tsx
-import { Flex, Text } from '@near-pagoda/ui';
+import { Flex } from '~/components/lib/Flex';
+import { Text } from '~/components/lib/Text';
 
 ...
 
-<Flex align="center">
+<Flex align="center" gap="m">
   <Text size="text-xl">Large</Text>
   <Text size="text-s">Small</Text>
 </Flex>
 
-<Flex justify="end">
+<Flex justify="flex-end" gap="l">
   <Text>Item 1</Text>
   <Text>Item 2</Text>
 </Flex>
 
-<Flex stack gap="l">
+<Flex direction="column" gap="xl" wrap="wrap">
   <Text>Item 1</Text>
   <Text>Item 2</Text>
 </Flex>
@@ -43,44 +44,16 @@ By default, `flex` renders a wrapping `<div>` tag. You can instead adjust it to 
 
 ## Breakpoint Adjustments
 
-Sometimes you need to apply adjustments to the layout based on certain screen sizes.
-
-### Stack
-
-Switch to a `stack` layout when the screen is small enough to be considered a `tablet` or `phone`:
+Sometimes you need to apply adjustments to the layout as the screen size gets smaller. You can do that by applying overrides for smaller screens with the `phone` and `tablet` props.
 
 ```tsx
-<Flex stack="tablet">
+<Flex
+  align="center"
+  gap="xl"
+  tablet={{ align: 'flex-start', gap: 'l' }}
+  phone={{ direction: 'column' }}
+>
   <Text>Item 1</Text>
   <Text>Item 2</Text>
-</Flex>
-
-<Flex stack="phone">
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-</Flex>
-```
-
-### Gap
-
-Switch the `gap` value when the screen is small enough to be considered a `tablet` or `phone`:
-
-```tsx
-<Flex gap="xl" gapTablet="l" gapPhone="m">
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-</Flex>
-```
-
-## Wrap
-
-When `wrap` is enabled, items will wrap to the next line if there's not enough room to display everything on one row:
-
-```tsx
-<Flex wrap>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-  <Text>Item 4</Text>
 </Flex>
 ```

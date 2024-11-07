@@ -1,6 +1,6 @@
-import { CSSProperties, ReactNode } from 'react';
+import { type CSSProperties, type MouseEventHandler, type ReactNode } from 'react';
 
-import { ThemeColor, ThemeFontSize } from '../utils/types';
+import { type ThemeColor, type ThemeFontSize } from '../utils/theme';
 import s from './Text.module.scss';
 
 type Tag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'label';
@@ -22,13 +22,20 @@ type Props = {
   children: ReactNode;
   clampLines?: number;
   className?: string;
+  clickableHighlight?: boolean;
   color?: ThemeColor;
+  decoration?: CSSProperties['textDecoration'];
+  family?: 'standard' | 'monospace';
+  forceWordBreak?: boolean;
   id?: string;
   size?: ThemeFontSize;
   sizePhone?: ThemeFontSize;
   sizeTablet?: ThemeFontSize;
   style?: CSSProperties;
+  noWrap?: boolean;
+  onClick?: MouseEventHandler<HTMLElement>;
   weight?: string | number;
+  uppercase?: boolean;
 };
 
 export const Text = ({
@@ -36,12 +43,17 @@ export const Text = ({
   children,
   clampLines,
   className = '',
+  clickableHighlight,
   color,
+  decoration,
+  family,
+  forceWordBreak,
   size,
-  sizePhone,
-  sizeTablet,
   style,
   weight,
+  noWrap,
+  onClick,
+  uppercase,
   ...props
 }: Props) => {
   const Tag = as;
@@ -51,15 +63,22 @@ export const Text = ({
     <Tag
       className={`${s.text} ${className}`}
       data-clamp-lines={clampLines}
-      data-size={size || defaultSize}
-      data-size-phone={sizePhone}
-      data-size-tablet={sizeTablet}
+      data-size={size ?? defaultSize}
+      data-clickable-highlight={clickableHighlight}
+      data-family={family}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
       style={{
         color: color ? (color === 'current' ? 'currentColor' : `var(--${color})`) : undefined,
+        textDecoration: decoration,
         fontWeight: weight,
         WebkitLineClamp: clampLines,
+        whiteSpace: noWrap ? 'nowrap' : undefined,
+        wordBreak: forceWordBreak ? 'break-word' : undefined,
+        textTransform: uppercase ? 'uppercase' : undefined,
         ...style,
       }}
+      onClick={onClick}
       {...props}
     >
       {children}

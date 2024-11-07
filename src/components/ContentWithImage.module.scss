@@ -1,14 +1,16 @@
-@import '../styles/mixins/variables';
+@import '../styles/variables';
 
 .wrapper {
   display: flex;
   align-items: center;
   gap: var(--gap-3xl);
 
-  @media (max-width: $tabletBreakpointMaxWidth) {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--gap-xl);
+  & {
+    @media (max-width: $tabletBreakpointMaxWidth) {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--gap-xl);
+    }
   }
 }
 
@@ -26,9 +28,11 @@
     order: 2;
   }
 
-  @media (max-width: $tabletBreakpointMaxWidth) {
-    max-width: 100%;
-    order: unset !important;
+  & {
+    @media (max-width: $tabletBreakpointMaxWidth) {
+      max-width: 100%;
+      order: unset !important;
+    }
   }
 }
 

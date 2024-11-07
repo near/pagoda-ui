@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-import { ThemeColor } from '../utils/types';
+import { type ThemeColor } from '../utils/theme';
 import s from './IconCircle.module.scss';
 
 type Props = {
@@ -8,11 +8,13 @@ type Props = {
   icon: ReactNode;
 };
 
-export const IconCircle = ({ color = 'sand11', icon }: Props) => {
+export const IconCircle = ({ color = 'sand-11', icon }: Props) => {
   return (
     <div
       className={s.iconCircle}
-      style={{ color: color ? (color === 'current' ? 'currentColor' : `var(--${color})`) : undefined }}
+      style={{
+        color: color ? (color === 'current' ? 'currentColor' : `var(--${color})`) : undefined,
+      }}
     >
       {icon}
     </div>

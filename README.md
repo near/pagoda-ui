@@ -15,40 +15,49 @@ pnpm add zustand
 pnpm add @near-pagoda/ui
 ```
 
-In your `_app.tsx` file, import the following CSS files in order:
+In your root `layout.tsx` file, wrap your application with the `<PagodaUiProvider>` and pass in your framework's `<Link>` component and router methods. You'll also want to include the `<Toaster />` component to display toasts when calling `openToast()`.
 
 ```tsx
-import '@near-pagoda/ui/globals.css';
-import '@near-pagoda/ui/theme.css';
-import '@near-pagoda/ui/lib.css';
-```
+'use client';
 
-Wrap your application with the `<PagodaUiProvider>` to pass in your framework's `<Link>` component and router methods. You'll also want to include the `<Toaster />` component to display toasts when calling `openToast()`:
+import '@near-pagoda/ui/styles.css';
 
-```tsx
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { PagodaUiProvider, Toaster } from '@near-pagoda/ui';
 
-...
+/*
+  The suppressHydrationWarning on <html> is required by next-theme's <ThemeProvider>:
+  https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
+*/
 
-const router = useRouter();
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1"
+        />
+      </head>
 
-...
-
-<PagodaUiProvider
-  value={{
-    routerPrefetch: router.prefetch,
-    routerPush: router.push,
-    Link,
-  }}
->
-  ...
-  <Toaster />
-</PagodaUiProvider>
+      <body>
+        <PagodaUiProvider
+          value={{
+            Link,
+            useRouter
+          }}
+        >
+          <Toaster />
+          <main>{children}</main>
+        </PagodaUiProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
-Why is `<PagodaUiProvider>` needed? Some of our components render anchor tags or dynamically change the current route. This provider allows our library to support any React framework (Vanilla/Vite, Next JS, etc) by passing in your router's components.
+Why is `<PagodaUiProvider>` needed? Some of our components render anchor tags or dynamically change the current route. This provider allows our library to support any React framework (Vanilla/Vite, Next JS, etc) by passing in your router's components and hooks. It also supports dark/light mode and opts into the user's preferred theme via [next-theme](ttps://github.com/pacocoursey/next-themes).
 
 ## Documentation
 

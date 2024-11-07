@@ -3,7 +3,8 @@ import { type ComponentPropsWithRef, forwardRef } from 'react';
 
 import s from './Checkbox.module.scss';
 
-type Props = Omit<ComponentPropsWithRef<'input'>, 'type'> & {
+type Props = Omit<ComponentPropsWithRef<'input'>, 'type' | 'name'> & {
+  name: string;
   type?: 'checkbox' | 'radio';
 };
 

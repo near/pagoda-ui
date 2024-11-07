@@ -1,54 +1,56 @@
 import type { CSSProperties, ReactNode } from 'react';
 
-import type { Align, Justify, Stack, ThemeGap } from '../utils/types';
+import { breakpointPropToCss, type ThemeBreakpointProps, type ThemeGap } from '../utils/theme';
 import s from './Flex.module.scss';
 
 type Props = {
-  align?: Align;
   as?: 'div' | 'label' | 'span';
   children: ReactNode;
   className?: string;
-  gap?: ThemeGap;
-  gapPhone?: ThemeGap;
-  gapTablet?: ThemeGap;
   id?: string;
-  justify?: Justify;
-  stack?: Stack;
-  stretch?: boolean;
   style?: CSSProperties;
-  wrap?: boolean;
-};
+} & ThemeBreakpointProps<{
+  align?: CSSProperties['alignItems'];
+  direction?: CSSProperties['flexDirection'];
+  gap?: ThemeGap;
+  justify?: CSSProperties['justifyContent'];
+  wrap?: CSSProperties['flexWrap'];
+}>;
 
 export const Flex = ({
-  align,
   as = 'div',
-  children,
   className = '',
-  gap = 'm',
-  gapPhone,
-  gapTablet,
+  style,
+
+  align,
+  direction,
+  gap,
   justify,
-  stack,
-  stretch,
+  phone,
+  tablet,
   wrap,
+
   ...props
 }: Props) => {
   const Element = as;
 
-  return (
-    <Element
-      className={`${s.flex} ${className}`}
-      data-align={align}
-      data-gap={gap}
-      data-gap-phone={gapPhone}
-      data-gap-tablet={gapTablet}
-      data-justify={justify}
-      data-stack={stack}
-      data-stretch={stretch}
-      data-wrap={wrap}
-      {...props}
-    >
-      {children}
-    </Element>
-  );
+  const breakpointProps = {
+    align,
+    direction,
+    gap,
+    justify,
+    phone,
+    tablet,
+    wrap,
+  };
+
+  const variables = {
+    ...breakpointPropToCss(breakpointProps, 'align', 'flex-align'),
+    ...breakpointPropToCss(breakpointProps, 'direction', 'flex-direction'),
+    ...breakpointPropToCss(breakpointProps, 'gap', 'flex-gap', true),
+    ...breakpointPropToCss(breakpointProps, 'justify', 'flex-justify'),
+    ...breakpointPropToCss(breakpointProps, 'wrap', 'flex-wrap'),
+  };
+
+  return <Element className={`${s.flex} ${className}`} style={{ ...style, ...variables }} {...props} />;
 };

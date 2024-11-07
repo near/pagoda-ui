@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from 'react';
+import { type ComponentProps, type ReactNode } from 'react';
 
 import { usePagodaUi } from '../context/PagodaUi';
 import s from './Article.module.scss';

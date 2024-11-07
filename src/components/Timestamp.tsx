@@ -1,3 +1,5 @@
+'use client';
+
 import { NoSsr } from './NoSsr';
 
 type Props = {

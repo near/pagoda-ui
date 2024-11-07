@@ -5,7 +5,7 @@ This component uses a native `<input type="file" />` tag underneath the hood. Th
 Additionally, you can pass a value for `maxFileSizeBytes` to limit the max size of each file. The default is unlimited (undefined).
 
 ```tsx
-import { FileInput } from '@near-pagoda/ui';
+import { FileInput } from '~/components/lib/FileInput';
 
 ...
 
@@ -29,19 +29,7 @@ const [disabled, setDisabled] = useState(false);
 ## React Hook Form
 
 ```tsx
-import { FileInput } from '@near-pagoda/ui';
-import { Controller, useForm } from 'react-hook-form';
-
-type FormSchema = {
-  artwork: File[];
-};
-
-...
-
-
-const form = useForm<FormSchema>();
-
-...
+import { Controller } from 'react-hook-form';
 
 <Controller
   control={form.control}
@@ -50,7 +38,12 @@ const form = useForm<FormSchema>();
     required: 'Please select an image',
   }}
   render={({ field, fieldState }) => (
-    <FileInput label="Event Artwork" accept="image/*" error={fieldState.error?.message} {...field} />
+    <FileInput
+      label="Event Artwork"
+      accept="image/*"
+      error={fieldState.error?.message}
+      {...field}
+    />
   )}
-/>
+/>;
 ```

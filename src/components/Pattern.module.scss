@@ -7,8 +7,10 @@
   background-repeat: repeat;
   background-position: center top;
 
-  @media (max-width: 1300px) {
-    margin: 0 calc(var(--section-padding-x) * -1);
+  & {
+    @media (max-width: 1300px) {
+      margin: 0 calc(var(--section-padding-x) * -1);
+    }
   }
 }
 

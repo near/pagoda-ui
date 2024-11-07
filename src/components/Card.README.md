@@ -1,7 +1,7 @@
 # Card
 
 ```tsx
-import { Card, Text } from '@near-pagoda/ui';
+import { Card } from '~/components/lib/Card';
 
 ...
 
@@ -17,7 +17,7 @@ Cards will typically be a readonly element. However, there are times where it ca
 
 ```tsx
 <Card aria-label="My Cool Card" onClick={() => { ... }}>
-  <SvgIcon icon={<CalendarDots weight="duotone" />} size="m" color="violet8" />
+  <SvgIcon icon={<CalendarDots weight="duotone" />} size="m" color="violet-10" />
   <Text size="text-l">My Cool Card</Text>
   <Text>Some other content goes here.</Text>
 </Card>

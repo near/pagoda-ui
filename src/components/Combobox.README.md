@@ -3,7 +3,7 @@
 Built with the Downshift `useCombobox()` hook: https://www.downshift-js.com/use-combobox
 
 ```tsx
-import { Combobox } from '@near-pagoda/ui';
+import { Combobox } from '~/components/lib/Combobox';
 
 ...
 
@@ -24,4 +24,26 @@ import { Combobox } from '@near-pagoda/ui';
   value={myCombobox}
   onChange={setMyCombobox}
 />
+```
+
+## React Hook Form
+
+```tsx
+import { Controller } from 'react-hook-form';
+
+<Controller
+  control={form.control}
+  name="myCombobox"
+  rules={{
+    required: 'Please select an option',
+  }}
+  render={({ field, fieldState }) => (
+    <Combobox
+      label="My Combobox"
+      items={items}
+      error={fieldState.error?.message}
+      {...field}
+    />
+  )}
+/>;
 ```

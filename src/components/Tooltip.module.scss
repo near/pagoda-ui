@@ -4,17 +4,16 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--sand12);
-  background-color: var(--white);
+  color: var(--sand-12);
+  background-color: var(--sand-1);
   z-index: 1000;
   max-width: 30rem;
   font-size: 0.8rem;
   line-height: 1.5;
   word-break: break-word;
   font-family: sans-serif;
-  box-shadow:
-    0 0 0 1px var(--blackA4),
-    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--sand-4);
   user-select: none;
   animation-duration: var(--transition-speed);
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -42,18 +41,18 @@
 }
 
 .arrowBorder {
-  fill: var(--blackA4);
-  stroke: var(--blackA4);
-  stroke-width: 2px;
+  fill: var(--sand-4);
+  stroke: var(--sand-4);
   margin-top: 1px;
-  margin-right: 1px;
 
-  [data-side='bottom'] &,
   [data-side='left'] & {
-    margin-right: -1px;
+    margin-left: 0.5px;
+  }
+  [data-side='right'] & {
+    margin-left: -0.5px;
   }
 }
 
 .arrowFill {
-  fill: var(--white);
+  fill: var(--sand-1);
 }
