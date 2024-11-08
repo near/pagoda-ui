@@ -1,3 +1,11 @@
+a.text {
+  &:hover,
+  &:focus-visible {
+    color: var(--violet-11) !important;
+    text-decoration: underline;
+  }
+}
+
 .text {
   text-wrap: pretty;
   text-underline-offset: 0.2em;
@@ -17,11 +25,9 @@
   a > & {
     display: inline;
   }
-
   a:has(&) {
     line-height: 0;
   }
-
   &[role='button']:hover,
   &[role='button']:focus-visible,
   [role='button']:hover > &,

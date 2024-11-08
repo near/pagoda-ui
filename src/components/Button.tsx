@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, ReactElement } from 'react';
+import type { ComponentProps, ComponentPropsWithRef, ReactElement } from 'react';
 import { forwardRef } from 'react';
 
 import { usePagodaUi } from '../context/PagodaUi';
@@ -13,7 +13,7 @@ type Props = Omit<ComponentPropsWithRef<'button'>, 'size'> & {
   count?: number;
   fill?: Fill;
   href?: string;
-  target?: ComponentPropsWithRef<'a'>['target'];
+  target?: ComponentProps<'a'>['target'];
   icon?: ReactElement;
   iconLeft?: ReactElement;
   iconRight?: ReactElement;

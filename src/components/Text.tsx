@@ -1,5 +1,6 @@
-import { type CSSProperties, type MouseEventHandler, type ReactNode } from 'react';
+import { ComponentProps, ComponentPropsWithRef, type CSSProperties, forwardRef } from 'react';
 
+import { usePagodaUi } from '../context/PagodaUi';
 import { type ThemeColor, type ThemeFontSize } from '../utils/theme';
 import s from './Text.module.scss';
 
@@ -17,71 +18,78 @@ const defaultSizes: Record<Tag, ThemeFontSize> = {
   label: 'text-base',
 };
 
-type Props = {
+type Props = Omit<ComponentPropsWithRef<'p'>, 'color'> & {
   as?: Tag;
-  children: ReactNode;
   clampLines?: number;
-  className?: string;
   clickableHighlight?: boolean;
   color?: ThemeColor;
   decoration?: CSSProperties['textDecoration'];
   family?: 'standard' | 'monospace';
   forceWordBreak?: boolean;
-  id?: string;
+  href?: string;
+  target?: ComponentProps<'a'>['target'];
   size?: ThemeFontSize;
   sizePhone?: ThemeFontSize;
   sizeTablet?: ThemeFontSize;
-  style?: CSSProperties;
   noWrap?: boolean;
-  onClick?: MouseEventHandler<HTMLElement>;
   weight?: string | number;
   uppercase?: boolean;
 };
 
-export const Text = ({
-  as = 'p',
-  children,
-  clampLines,
-  className = '',
-  clickableHighlight,
-  color,
-  decoration,
-  family,
-  forceWordBreak,
-  size,
-  style,
-  weight,
-  noWrap,
-  onClick,
-  uppercase,
-  ...props
-}: Props) => {
-  const Tag = as;
-  const defaultSize = defaultSizes[as];
+export const Text = forwardRef<HTMLParagraphElement, Props>(
+  (
+    {
+      as = 'p',
+      children,
+      clampLines,
+      className = '',
+      clickableHighlight,
+      color,
+      decoration,
+      family,
+      forceWordBreak,
+      size,
+      style,
+      weight,
+      noWrap,
+      onClick,
+      uppercase,
+      ...props
+    },
+    ref,
+  ) => {
+    const Tag = as;
+    const defaultSize = defaultSizes[as];
+    const { Link } = usePagodaUi();
+    const Element: any = props.href ? Link : Tag;
 
-  return (
-    <Tag
-      className={`${s.text} ${className}`}
-      data-clamp-lines={clampLines}
-      data-size={size ?? defaultSize}
-      data-clickable-highlight={clickableHighlight}
-      data-family={family}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      style={{
-        color: color ? (color === 'current' ? 'currentColor' : `var(--${color})`) : undefined,
-        textDecoration: decoration,
-        fontWeight: weight,
-        WebkitLineClamp: clampLines,
-        whiteSpace: noWrap ? 'nowrap' : undefined,
-        wordBreak: forceWordBreak ? 'break-word' : undefined,
-        textTransform: uppercase ? 'uppercase' : undefined,
-        ...style,
-      }}
-      onClick={onClick}
-      {...props}
-    >
-      {children}
-    </Tag>
-  );
-};
+    return (
+      <Element
+        className={`${s.text} ${className}`}
+        data-clamp-lines={clampLines}
+        data-size={size ?? defaultSize}
+        data-clickable-highlight={clickableHighlight}
+        data-family={family}
+        role={onClick ? 'button' : undefined}
+        tabIndex={onClick ? 0 : undefined}
+        style={{
+          color: color ? (color === 'current' ? 'currentColor' : `var(--${color})`) : undefined,
+          textDecoration: decoration,
+          fontWeight: weight,
+          WebkitLineClamp: clampLines,
+          whiteSpace: noWrap ? 'nowrap' : undefined,
+          wordBreak: forceWordBreak ? 'break-word' : undefined,
+          textTransform: uppercase ? 'uppercase' : undefined,
+          ...style,
+        }}
+        onClick={onClick}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </Element>
+    );
+  },
+);
+
+Text.displayName = 'Text';

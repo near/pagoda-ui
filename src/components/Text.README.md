@@ -10,6 +10,8 @@ import { Text } from '~/components/lib/Text';
 <Text size="text-xs">My Text</Text>
 <Text as="h1">My Text</Text>
 <Text as="h2" size="text-s" color="red-8">My Text</Text>
+<Text href="/foo/bar">My Text</Text>
+<Text href="/foo/bar" target="_blank">My Text</Text>
 ```
 
 ## Line Clamp
