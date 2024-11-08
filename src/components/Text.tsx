@@ -44,13 +44,10 @@ export const Text = forwardRef<HTMLParagraphElement, Props>(
       clampLines,
       className = '',
       clickableHighlight,
-      color,
-      decoration,
       family,
       forceWordBreak,
       size,
       style,
-      weight,
       noWrap,
       onClick,
       uppercase,
@@ -62,6 +59,9 @@ export const Text = forwardRef<HTMLParagraphElement, Props>(
     const defaultSize = defaultSizes[as];
     const { Link } = usePagodaUi();
     const Element: any = props.href ? Link : Tag;
+    const color = props.color ?? (props.href ? 'violet-10' : undefined);
+    const weight = props.weight ?? (props.href ? 500 : undefined);
+    const decoration = props.decoration ?? (props.href ? 'underline' : undefined);
 
     return (
       <Element
