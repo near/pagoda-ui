@@ -96,7 +96,7 @@
   cursor: pointer;
   transition: var(--transitions);
 
-  [data-icon][data-color='current'] {
+  :global(.svgIcon[data-color='current']) {
     color: var(--sand-10) !important;
   }
 
@@ -109,7 +109,7 @@
   &[data-state='open'] {
     background-color: var(--sand-3);
 
-    [data-icon] {
+    :global(.svgIcon) {
       color: var(--violet-10) !important;
     }
   }

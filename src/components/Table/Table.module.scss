@@ -54,11 +54,6 @@
       bottom: var(--table-half-padding);
     }
   }
-
-  &[data-test='true'] {
-    position: fixed;
-    top: 100px;
-  }
 }
 
 .foot {

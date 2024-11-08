@@ -14,7 +14,7 @@ type Props = {
 
 export const ImageIcon = ({ alt, className = '', fallbackIcon, size = 'm', src, ...props }: Props) => {
   return (
-    <div className={`${s.imageIcon} ${className}`} data-icon data-size={size} {...props}>
+    <div className={`${s.imageIcon} ${className} image-icon`} data-size={size} {...props}>
       {src ? <img src={src} alt={alt} /> : fallbackIcon}
     </div>
   );

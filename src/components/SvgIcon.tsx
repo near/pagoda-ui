@@ -25,9 +25,8 @@ export const SvgIcon = ({
 }: Props) => {
   return (
     <div
-      className={`${s.svgIcon} ${className}`}
+      className={`${s.svgIcon} ${className} svgIcon`}
       data-color={color}
-      data-icon
       data-size={size}
       data-no-fill={noFill}
       data-no-stroke={noStroke}
