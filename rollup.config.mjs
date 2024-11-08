@@ -9,7 +9,7 @@ import postcss from 'rollup-plugin-postcss';
 import scss from 'rollup-plugin-scss';
 import { visualizer } from 'rollup-plugin-visualizer';
 
-import concat from './rollup-plugin-concat';
+import concat from './rollup-plugin-concat.mjs';
 
 /** @type {import('rollup').RollupOptions} */
 const options = {
