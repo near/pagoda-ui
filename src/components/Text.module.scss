@@ -36,10 +36,8 @@ a.text {
   button:focus-visible > &,
   a:hover > &,
   a:focus-visible > & {
-    &:not([aria-describedby]) {
-      color: var(--violet-11) !important;
-      text-decoration: underline;
-    }
+    color: var(--violet-11) !important;
+    text-decoration: underline;
   }
 
   &[data-clickable-highlight='true'] {
