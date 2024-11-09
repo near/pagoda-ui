@@ -2,7 +2,7 @@ a.text {
   &:hover,
   &:focus-visible {
     color: var(--violet-11) !important;
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 }
 
