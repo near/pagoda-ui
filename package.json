@@ -1,6 +1,6 @@
 {
   "name": "@near-pagoda/ui",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A React component library that implements the official NEAR design system.",
   "license": "MIT",
   "repository": {
@@ -24,10 +24,11 @@
     "lint:strict": "pnpm lint --max-warnings 0",
     "pre-commit": "pnpm format && pnpm lint:strict && pnpm ts:check",
     "pre-publish": "pnpm pre-commit && pnpm test",
+    "prepare": "husky",
+    "repomix": "repomix --include 'src/**/*.ts,src/**/*.tsx,src/**/*.md'",
     "test": "vitest run",
     "test:watch": "vitest",
-    "ts:check": "tsc --noEmit --incremental",
-    "prepare": "husky"
+    "ts:check": "tsc --noEmit --incremental"
   },
   "engines": {
     "node": ">=18"
@@ -75,7 +76,8 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "downshift": "^9.0.6",
     "lodash-es": "^4.17.21",
-    "next-themes": "^0.4.3"
+    "next-themes": "^0.4.3",
+    "repomix": "^0.2.2"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.1",
