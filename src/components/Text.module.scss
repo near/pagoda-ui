@@ -59,6 +59,9 @@ a.text {
     text-overflow: ellipsis;
     word-break: break-word;
   }
+  &[data-clamp-lines='1'] {
+    word-break: break-all;
+  }
 
   &[data-size='text-hero-xl'] {
     font: var(--text-hero-xl);
