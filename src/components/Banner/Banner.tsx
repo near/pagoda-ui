@@ -60,7 +60,7 @@ export const Banner = ({ actions, bannerId, message }: Props) => {
 
   return (
     <div className={s.banner} ref={ref}>
-      <Text weight="500" sizePhone="text-xs">
+      <Text weight="500" size="text-s">
         {message}
       </Text>
 

@@ -16,7 +16,7 @@ export const CookiePrompt = ({ cookiePolicyUrl = '/cookies' }: Props) => {
 
   return (
     <div className={s.cookiePrompt}>
-      <Text size="text-s" sizePhone="text-xs">
+      <Text size="text-s">
         We use our own and third-party cookies on our website to enhance your experience, analyze traffic, and for
         marketing. For more information see our&nbsp;
         <Link target="_blank" href={cookiePolicyUrl}>

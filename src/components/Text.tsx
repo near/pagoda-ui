@@ -29,8 +29,6 @@ type Props = Omit<ComponentPropsWithRef<'p'>, 'color'> & {
   href?: string;
   target?: ComponentProps<'a'>['target'];
   size?: ThemeFontSize;
-  sizePhone?: ThemeFontSize;
-  sizeTablet?: ThemeFontSize;
   noWrap?: boolean;
   weight?: string | number;
   uppercase?: boolean;
