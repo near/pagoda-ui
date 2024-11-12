@@ -33,7 +33,7 @@ export const Badge = forwardRef<HTMLSpanElement, Props>(
         {...props}
       >
         {iconLeft && <span className={s.icon}>{iconLeft}</span>}
-        {label}
+        <span className={s.label}>{label}</span>
         {iconRight && <span className={s.icon}>{iconRight}</span>}
       </span>
     );

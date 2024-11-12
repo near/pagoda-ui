@@ -22,6 +22,10 @@
   outline: none;
   transition: var(--transitions);
 
+  button:has(> &) {
+    min-width: min-content !important;
+  }
+
   &[role='button'] {
     border-radius: 100px;
     cursor: pointer;
@@ -94,6 +98,7 @@
   color: var(--badge-color-icon);
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
 
   svg {
     width: 100%;
@@ -101,4 +106,10 @@
     fill: currentColor;
     stroke: currentColor;
   }
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
