@@ -35,10 +35,6 @@
     --button-color-border: var(--violet-9) !important;
   }
 
-  &[data-icon='true'] {
-    --button-width: calc(var(--button-height) - 2px); // Subtract border width
-  }
-
   &[data-size='x-small'] {
     --button-font: var(--text-xs);
     --button-gap: 4px;
@@ -59,6 +55,11 @@
     --button-size: 48px;
     --button-size-icon: 20px;
     --button-padding-x: 24px;
+  }
+
+  &[data-icon='true'] {
+    --button-width: var(--button-height);
+    --button-padding-x: 0px;
   }
 
   &[data-variant='primary'] {
