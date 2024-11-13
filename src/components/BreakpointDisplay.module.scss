@@ -1,6 +1,8 @@
 @import '../styles/variables';
 
 .breakpoint {
+  flex-shrink: 0;
+
   &[data-show='sidebar-small-screen'],
   &[data-show='smaller-than-desktop'] {
     @media (min-width: calc(#{$tabletBreakpointMaxWidth} + 1px)) {
