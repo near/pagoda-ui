@@ -36,7 +36,7 @@
   }
 
   &[data-icon='true'] {
-    --button-width: var(--button-height);
+    --button-width: calc(var(--button-height) - 2px); // Subtract border width
   }
 
   &[data-size='x-small'] {
