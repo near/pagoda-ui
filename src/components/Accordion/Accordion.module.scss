@@ -1,15 +1,16 @@
 .root {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--gap-m);
+
+  &[data-gap='l'] {
+    gap: var(--gap-l);
+  }
 }
 
 .item {
-  border-radius: 6px;
-  box-shadow: 0 0 0 0px var(--violet-5);
   transition: var(--transitions);
-
-  &:focus-within {
-    box-shadow: 0 0 0 4px var(--violet-5);
-  }
 }
 
 .header {
@@ -26,12 +27,19 @@
   font: var(--text-s);
   font-weight: 600;
   color: var(--sand-12);
-  padding: var(--gap-m);
+  padding: 0;
   cursor: pointer;
   transition: var(--transitions);
+  border-radius: 2px;
+  outline: 0px solid var(--violet-5);
+  outline-offset: var(--gap-s);
 
   &:hover {
     color: var(--violet-11);
+  }
+
+  &:focus-visible {
+    outline: 4px solid var(--violet-5);
   }
 }
 
@@ -56,6 +64,7 @@
 .content {
   overflow: hidden;
   font: var(--text-s);
+  padding-block: var(--gap-m);
 
   &[data-state='open'] {
     animation: slideDown var(--transition-speed);
@@ -67,7 +76,7 @@
   @keyframes slideDown {
     from {
       height: 0;
-      padding-bottom: 0;
+      padding-block: 0;
     }
     to {
       height: var(--radix-accordion-content-height);
@@ -80,7 +89,7 @@
     }
     to {
       height: 0;
-      padding-bottom: 0;
+      padding-block: 0;
     }
   }
 }
@@ -89,5 +98,4 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-m);
-  padding: 0 var(--gap-m) var(--gap-m) var(--gap-m);
 }

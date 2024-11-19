@@ -8,13 +8,15 @@ import { forwardRef } from 'react';
 import { Flex } from '../Flex';
 import s from './Accordion.module.scss';
 
-type RootProps = ComponentProps<typeof Primitive.Root>;
+type RootProps = ComponentProps<typeof Primitive.Root> & {
+  gap?: 'm' | 'l';
+};
 type ContentProps = ComponentProps<typeof Primitive.Content>;
 type TriggerProps = ComponentProps<typeof Primitive.Trigger>;
 type ItemProps = ComponentProps<typeof Primitive.Item>;
 
-export const Root = forwardRef<HTMLDivElement, RootProps>((props, ref) => {
-  return <Primitive.Root className={s.root} ref={ref} {...props} />;
+export const Root = forwardRef<HTMLDivElement, RootProps>(({ gap = 'm', ...props }, ref) => {
+  return <Primitive.Root className={s.root} data-gap={gap} ref={ref} {...props} />;
 });
 Root.displayName = 'Root';
 

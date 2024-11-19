@@ -19,7 +19,7 @@
   --transitions: color var(--transition-speed), border-color var(--transition-speed),
     background-color var(--transition-speed), box-shadow var(--transition-speed), opacity var(--transition-speed),
     transform var(--transition-speed), fill var(--transition-speed), outline-color var(--transition-speed),
-    width var(--transition-speed), height var(--transition-speed);
+    outline-width var(--transition-speed), width var(--transition-speed), height var(--transition-speed);
 
   --gap-none: 0;
   --gap-xs: 0.25rem;

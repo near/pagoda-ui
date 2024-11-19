@@ -8,11 +8,12 @@ a.text {
 
 .text {
   text-wrap: pretty;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.25em;
   outline: none;
   background: none;
   padding: 0;
   border: none;
+  transition: var(--transitions);
 
   &[role='button'] {
     cursor: pointer;
