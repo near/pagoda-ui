@@ -85,7 +85,7 @@
   .row {
     &:hover {
       td {
-        background: var(--sand-3);
+        background: var(--sand-2);
       }
     }
   }
@@ -140,6 +140,7 @@
   vertical-align: middle;
   transition: var(--transitions);
   font: var(--text-s);
+  position: relative;
 
   &:first-child {
     border-top-left-radius: var(--table-border-radius);
@@ -157,7 +158,7 @@
     outline: var(--table-default-outline);
 
     &:hover {
-      background: var(--sand-4) !important;
+      background: var(--violet-3) !important;
     }
 
     &:focus-visible,
@@ -170,16 +171,20 @@
     pointer-events: none;
     opacity: 0.5;
   }
-
-  &[data-link='true'] {
-    padding: 0;
-  }
 }
 
 .cellAnchor {
-  display: block;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  inset: 0;
   padding: var(--table-half-padding);
   color: currentColor;
   text-decoration: none;
   outline: none;
+}
+
+.cellAnchorHiddenChildren {
+  opacity: 0;
+  pointer-events: none;
 }

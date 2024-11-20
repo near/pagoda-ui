@@ -26,6 +26,8 @@ a.text {
   &[data-parent-clickable='true'] {
     [role='button']:hover &,
     [role='button']:focus-visible &,
+    [data-clickable='true']:hover &,
+    [data-clickable='true']:focus-visible &,
     button:hover &,
     button:focus-visible &,
     a:hover &,

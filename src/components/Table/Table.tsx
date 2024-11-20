@@ -257,7 +257,7 @@ type CellProps = ComponentPropsWithRef<'td'> & {
 
 export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
   ({ children, disabled, href, spanAllColumns, target, ...props }, ref) => {
-    const clickable = !!props.onClick;
+    const clickable = !!props.onClick || !!href;
     const isButton = !!props.onClick && !href;
     const role = isButton ? 'button' : undefined;
     const tabIndex = isButton ? (disabled ? -1 : 0) : undefined;
@@ -277,7 +277,6 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
         className={s.cell}
         aria-disabled={disabled}
         data-clickable={clickable}
-        data-link={!!href}
         role={role}
         tabIndex={tabIndex}
         ref={ref}
@@ -286,9 +285,15 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
         onKeyDown={onKeyDown}
       >
         {href ? (
-          <Link href={href} className={s.cellAnchor} target={target}>
-            {children}
-          </Link>
+          <>
+            <Link href={href} className={s.cellAnchor} target={target}>
+              {children}
+            </Link>
+
+            <span className={s.cellAnchorHiddenChildren} aria-hidden="true">
+              {children}
+            </span>
+          </>
         ) : (
           children
         )}
