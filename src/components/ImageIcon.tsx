@@ -7,14 +7,28 @@ type Props = {
   alt: string;
   className?: string;
   fallbackIcon?: ReactNode;
+  indicateParentClickable?: boolean;
   size?: ThemeIconSize;
   src: string | undefined;
   style?: CSSProperties;
 };
 
-export const ImageIcon = ({ alt, className = '', fallbackIcon, size = 'm', src, ...props }: Props) => {
+export const ImageIcon = ({
+  alt,
+  className = '',
+  fallbackIcon,
+  indicateParentClickable,
+  size = 'm',
+  src,
+  ...props
+}: Props) => {
   return (
-    <div className={`${s.imageIcon} ${className} image-icon`} data-size={size} {...props}>
+    <div
+      className={`${s.imageIcon} ${className} image-icon`}
+      data-parent-clickable={indicateParentClickable}
+      data-size={size}
+      {...props}
+    >
       {src ? <img src={src} alt={alt} /> : fallbackIcon}
     </div>
   );

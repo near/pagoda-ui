@@ -21,12 +21,12 @@ const defaultSizes: Record<Tag, ThemeFontSize> = {
 type Props = Omit<ComponentPropsWithRef<'p'>, 'color'> & {
   as?: Tag;
   clampLines?: number;
-  clickableHighlight?: boolean;
   color?: ThemeColor;
   decoration?: CSSProperties['textDecoration'];
   family?: 'standard' | 'monospace';
   forceWordBreak?: boolean;
   href?: string;
+  indicateParentClickable?: boolean;
   target?: ComponentProps<'a'>['target'];
   size?: ThemeFontSize;
   noWrap?: boolean;
@@ -41,9 +41,9 @@ export const Text = forwardRef<HTMLParagraphElement, Props>(
       children,
       clampLines,
       className = '',
-      clickableHighlight,
       family,
       forceWordBreak,
+      indicateParentClickable,
       size,
       style,
       noWrap,
@@ -66,7 +66,7 @@ export const Text = forwardRef<HTMLParagraphElement, Props>(
         className={`${s.text} ${className}`}
         data-clamp-lines={clampLines}
         data-size={size ?? defaultSize}
-        data-clickable-highlight={clickableHighlight}
+        data-parent-clickable={indicateParentClickable}
         data-family={family}
         role={onClick ? 'button' : undefined}
         tabIndex={onClick ? 0 : undefined}

@@ -9,7 +9,10 @@ type Props = ComponentPropsWithRef<'div'> & {
   href?: string;
   target?: ComponentPropsWithRef<'a'>['target'];
   background?: ThemeColor;
+  backgroundHover?: ThemeColor;
   border?: ThemeColor;
+  borderHover?: ThemeColor;
+  indicateFocus?: boolean;
   padding?: 's' | 'm' | 'l';
   paddingInline?: 's' | 'm' | 'l';
   gap?: 'xs' | 's' | 'm' | 'l';
@@ -20,8 +23,11 @@ export const Card = forwardRef<HTMLDivElement, Props>(
     {
       animateIn,
       background = 'sand-0',
+      backgroundHover,
       border = 'sand-5',
+      borderHover,
       className = '',
+      indicateFocus = true,
       gap,
       padding,
       paddingInline,
@@ -38,6 +44,7 @@ export const Card = forwardRef<HTMLDivElement, Props>(
         className={`${s.card} ${className}`}
         data-animate-in={animateIn}
         data-background={background}
+        data-focus={indicateFocus}
         data-gap={gap}
         data-padding={padding}
         data-padding-inline={paddingInline}
@@ -46,7 +53,9 @@ export const Card = forwardRef<HTMLDivElement, Props>(
         ref={ref}
         style={{
           '--card-background-color': `var(--${background})`,
+          '--card-background-hover-color': backgroundHover ? `var(--${backgroundHover})` : undefined,
           '--card-border-color': `var(--${border})`,
+          '--card-border-hover-color': borderHover ? `var(--${borderHover})` : undefined,
           ...style,
         }}
         {...props}

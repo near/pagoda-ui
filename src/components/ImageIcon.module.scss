@@ -47,10 +47,20 @@
     height: var(--icon-size-xl);
     padding: 8px;
   }
-}
 
-a:focus-visible .imageIcon {
-  box-shadow:
-    0 0 0 1px var(--violet-9),
-    0 0 0 5px var(--violet-5);
+  &[data-parent-clickable='true'] {
+    a:focus-visible &,
+    [role='button']:focus-visible &,
+    button:focus-visible & {
+      box-shadow:
+        0 0 0 1px var(--violet-9),
+        0 0 0 5px var(--violet-5);
+    }
+
+    a:hover &,
+    [role='button']:hover &,
+    button:hover & {
+      transform: scale(1.15, 1.15);
+    }
+  }
 }
