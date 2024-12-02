@@ -26,7 +26,7 @@ type RootProps = {
 
 const TableContext = createContext<RootProps | undefined>(undefined);
 
-export const Root = forwardRef<HTMLTableElement, RootProps>((props, ref) => {
+export const Root = forwardRef<HTMLTableElement, RootProps>(({ className = '', ...props }, ref) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export const Root = forwardRef<HTMLTableElement, RootProps>((props, ref) => {
 
   return (
     <TableContext.Provider value={props}>
-      <div className={`${s.root} ${props.className}`} ref={rootRef}>
+      <div className={`${s.root} ${className}`} ref={rootRef}>
         <table className={s.table} ref={ref}>
           {props.children}
         </table>
@@ -105,19 +105,21 @@ type HeadProps = ComponentPropsWithRef<'thead'> & {
   sticky?: boolean;
 };
 
-export const Head = forwardRef<HTMLTableSectionElement, HeadProps>(({ children, sticky = true, ...props }, ref) => {
-  return (
-    <thead className={s.head} data-sticky={sticky} ref={ref} {...props}>
-      {children}
-    </thead>
-  );
-});
+export const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
+  ({ className = '', children, sticky = true, ...props }, ref) => {
+    return (
+      <thead className={`${s.head} ${className}`} data-sticky={sticky} ref={ref} {...props}>
+        {children}
+      </thead>
+    );
+  },
+);
 Head.displayName = 'Head';
 
 type BodyProps = ComponentPropsWithRef<'tbody'>;
 
-export const Body = forwardRef<HTMLTableSectionElement, BodyProps>((props, ref) => {
-  return <tbody className={s.body} ref={ref} {...props} />;
+export const Body = forwardRef<HTMLTableSectionElement, BodyProps>(({ className = '', ...props }, ref) => {
+  return <tbody className={`${s.body} ${className}`} ref={ref} {...props} />;
 });
 Body.displayName = 'Body';
 
@@ -125,14 +127,16 @@ type FootProps = ComponentPropsWithRef<'tfoot'> & {
   sticky?: boolean;
 };
 
-export const Foot = forwardRef<HTMLTableSectionElement, FootProps>(({ sticky = true, ...props }, ref) => {
-  return <tfoot className={s.foot} data-sticky={sticky} ref={ref} {...props} />;
-});
+export const Foot = forwardRef<HTMLTableSectionElement, FootProps>(
+  ({ sticky = true, className = '', ...props }, ref) => {
+    return <tfoot className={`${s.foot} ${className}`} data-sticky={sticky} ref={ref} {...props} />;
+  },
+);
 Foot.displayName = 'Foot';
 
 type RowProps = ComponentPropsWithRef<'tr'>;
 
-export const Row = forwardRef<HTMLTableRowElement, RowProps>((props, ref) => {
+export const Row = forwardRef<HTMLTableRowElement, RowProps>(({ className = '', ...props }, ref) => {
   const clickable = !!props.onClick;
   const role = clickable ? 'button' : undefined;
   const tabIndex = clickable ? 0 : undefined;
@@ -148,7 +152,7 @@ export const Row = forwardRef<HTMLTableRowElement, RowProps>((props, ref) => {
 
   return (
     <tr
-      className={s.row}
+      className={`${s.row} ${className}`}
       data-clickable={clickable}
       role={role}
       tabIndex={tabIndex}
@@ -177,7 +181,7 @@ type HeadCellProps = ComponentPropsWithRef<'th'> &
   );
 
 export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(
-  ({ children, column, sortable, ...props }, ref) => {
+  ({ children, column, sortable, className = '', ...props }, ref) => {
     const { sort, setSort } = useContext(TableContext)!;
     const clickable = !!props.onClick || !!sortable;
     const role = clickable ? 'button' : undefined;
@@ -217,7 +221,7 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(
 
     return (
       <th
-        className={s.headCell}
+        className={`${s.headCell} ${className}`}
         data-clickable={clickable}
         role={role}
         tabIndex={tabIndex}
@@ -256,7 +260,7 @@ type CellProps = ComponentPropsWithRef<'td'> & {
 };
 
 export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
-  ({ children, disabled, href, spanAllColumns, target, ...props }, ref) => {
+  ({ children, disabled, href, spanAllColumns, target, className = '', ...props }, ref) => {
     const clickable = !!props.onClick || !!href;
     const isButton = !!props.onClick && !href;
     const role = isButton ? 'button' : undefined;
@@ -274,7 +278,7 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
 
     return (
       <td
-        className={s.cell}
+        className={`${s.cell} ${className}`}
         aria-disabled={disabled}
         data-clickable={clickable}
         role={role}
