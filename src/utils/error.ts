@@ -1,4 +1,4 @@
-import { openToast } from '../components/Toast';
+import { openToast } from '../components/Toast/api';
 
 export function handleClientError({ error, title, description }: { error: any; title?: string; description?: string }) {
   console.error(error);

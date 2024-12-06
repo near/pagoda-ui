@@ -1,4 +1,4 @@
-import { openToast } from '../components/Toast';
+import { openToast } from '../components/Toast/api';
 
 export async function copyTextToClipboard(content: string, description?: string) {
   try {
@@ -6,7 +6,7 @@ export async function copyTextToClipboard(content: string, description?: string)
 
     openToast({
       type: 'success',
-      title: 'Copied',
+      title: 'Copied To Clipboard',
       description,
     });
   } catch (error) {

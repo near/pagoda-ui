@@ -1,6 +1,6 @@
 {
   "name": "@near-pagoda/ui",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "A React component library that implements the official NEAR design system.",
   "license": "MIT",
   "repository": {
@@ -37,23 +37,23 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.esm.js"
-      },
-      "require": {
-        "types": "./dist/cjs/index.d.ts",
-        "default": "./dist/cjs/index.cjs.js"
-      }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
     },
-    "./*.css": {
-      "import": "./dist/*.css",
-      "require": "./dist/*.css"
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.esm.js",
+      "require": "./dist/utils/index.cjs.js"
+    },
+    "./styles.css": {
+      "import": "./dist/styles.css",
+      "require": "./dist/styles.css"
     }
   },
   "peerDependencies": {

@@ -49,16 +49,6 @@ export { useTheme } from 'next-themes';
 export * from './components/CookiePrompt/hooks';
 export * from './hooks/debounce';
 
-// Utils
-
-export * from './utils/clipboard';
-export * from './utils/error';
-export * from './utils/input-handlers';
-export * from './utils/merge-refs';
-export * from './utils/number';
-export * from './utils/theme';
-export * from './utils/unreachable';
-
 // Contexts
 
 export { PagodaUiProvider } from './context/PagodaUi';
