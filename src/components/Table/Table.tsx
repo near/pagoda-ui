@@ -11,6 +11,7 @@ import type {
 import { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 
 import { usePagodaUi } from '../../context/PagodaUi';
+import { mergeRefs } from '../../utils';
 import { Flex } from '../Flex';
 import { Placeholder } from '../Placeholder';
 import { SvgIcon } from '../SvgIcon';
@@ -140,14 +141,16 @@ export const Row = forwardRef<HTMLTableRowElement, RowProps>(({ className = '', 
   const clickable = !!props.onClick;
   const role = clickable ? 'button' : undefined;
   const tabIndex = clickable ? 0 : undefined;
+  const rowRef = useRef<HTMLTableRowElement | null>(null);
 
   const onKeyDown: KeyboardEventHandler<HTMLTableRowElement> = (event) => {
-    if (event.key === 'Enter') {
+    if (props.onKeyDown) props.onKeyDown(event);
+
+    if (event.key === 'Enter' && rowRef.current === event.target) {
       event.preventDefault();
       event.stopPropagation();
       event.target.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
     }
-    if (props.onKeyDown) props.onKeyDown(event);
   };
 
   return (
@@ -156,7 +159,7 @@ export const Row = forwardRef<HTMLTableRowElement, RowProps>(({ className = '', 
       data-clickable={clickable}
       role={role}
       tabIndex={tabIndex}
-      ref={ref}
+      ref={mergeRefs([ref, rowRef])}
       {...props}
       onKeyDown={onKeyDown}
     />
@@ -187,11 +190,12 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(
     const role = clickable ? 'button' : undefined;
     const tabIndex = clickable ? 0 : undefined;
     const columnHasActiveSort = sort?.column === column;
+    const cellRef = useRef<HTMLTableCellElement | null>(null);
 
     const onKeyDown: KeyboardEventHandler<HTMLTableCellElement> = (event) => {
       if (props.onKeyDown) props.onKeyDown(event);
 
-      if (event.key === 'Enter') {
+      if (event.key === 'Enter' && cellRef.current === event.target) {
         event.preventDefault();
         event.stopPropagation();
         event.target.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
@@ -225,7 +229,7 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(
         data-clickable={clickable}
         role={role}
         tabIndex={tabIndex}
-        ref={ref}
+        ref={mergeRefs([ref, cellRef])}
         {...props}
         onKeyDown={onKeyDown}
         onClick={onClick}
@@ -266,14 +270,16 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
     const role = isButton ? 'button' : undefined;
     const tabIndex = isButton ? (disabled ? -1 : 0) : undefined;
     const { Link } = usePagodaUi();
+    const cellRef = useRef<HTMLTableCellElement | null>(null);
 
     const onKeyDown: KeyboardEventHandler<HTMLTableCellElement> = (event) => {
-      if (event.key === 'Enter') {
+      if (props.onKeyDown) props.onKeyDown(event);
+
+      if (event.key === 'Enter' && cellRef.current === event.target) {
         event.preventDefault();
         event.stopPropagation();
         event.target.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
       }
-      if (props.onKeyDown) props.onKeyDown(event);
     };
 
     return (
@@ -283,7 +289,7 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(
         data-clickable={clickable}
         role={role}
         tabIndex={tabIndex}
-        ref={ref}
+        ref={mergeRefs([ref, cellRef])}
         {...props}
         colSpan={spanAllColumns ? 10_000 : props.colSpan}
         onKeyDown={onKeyDown}
