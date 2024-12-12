@@ -6,7 +6,7 @@ import { forwardRef } from 'react';
 import { useEffect, useRef } from 'react';
 
 import { usePagodaUi } from '../../context/PagodaUi';
-import { mergeRefs } from '../../utils/merge-refs';
+import { mergeRefs } from '../../helpers/merge-refs';
 import s from './Tabs.module.scss';
 
 type RootProps = Omit<ComponentProps<typeof Primitive.Root>, 'size' | 'variant'> & {

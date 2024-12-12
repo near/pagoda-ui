@@ -1,4 +1,4 @@
-import { openToast } from '../components/Toast/api';
+import { openToast } from '../components/Toast';
 
 export async function copyTextToClipboard(content: string, description?: string) {
   try {

@@ -4,8 +4,8 @@ import { MagnifyingGlass } from '@phosphor-icons/react';
 import type { ComponentPropsWithRef, FormEventHandler, ReactElement } from 'react';
 import { forwardRef } from 'react';
 
-import type { NumberInputHandlerOptions } from '../utils/input-handlers';
-import { numberInputHandler } from '../utils/input-handlers';
+import type { NumberInputHandlerOptions } from '../helpers/input-handlers';
+import { numberInputHandler } from '../helpers/input-handlers';
 import { type ThemeInputVariant } from '../utils/theme';
 import { AssistiveText } from './AssistiveText';
 import s from './Input.module.scss';

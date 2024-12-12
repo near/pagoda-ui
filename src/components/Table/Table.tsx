@@ -11,7 +11,7 @@ import type {
 import { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 
 import { usePagodaUi } from '../../context/PagodaUi';
-import { mergeRefs } from '../../utils';
+import { mergeRefs } from '../../helpers/merge-refs';
 import { Flex } from '../Flex';
 import { Placeholder } from '../Placeholder';
 import { SvgIcon } from '../SvgIcon';

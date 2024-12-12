@@ -8,8 +8,8 @@ import { forwardRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
+import { mergeRefs } from '../helpers/merge-refs';
 import { useDebouncedValue } from '../hooks/debounce';
-import { mergeRefs } from '../utils/merge-refs';
 import s from './Combobox.module.scss';
 import { Input } from './Input';
 import { SvgIcon } from './SvgIcon';
