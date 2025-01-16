@@ -18,7 +18,9 @@ export const Checkbox = forwardRef<HTMLInputElement, Props>(({ className = '', t
 });
 Checkbox.displayName = 'Checkbox';
 
-export const CheckboxGroup = forwardRef<HTMLInputElement, Props>(({ className = '', ...props }, ref) => {
+type CheckboxGroupProps = ComponentPropsWithRef<'div'>;
+
+export const CheckboxGroup = forwardRef<HTMLInputElement, CheckboxGroupProps>(({ className = '', ...props }, ref) => {
   return <div role="group" className={`${s.group} ${className}`} ref={ref} {...props} />;
 });
 CheckboxGroup.displayName = 'CheckboxGroup';

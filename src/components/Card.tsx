@@ -5,6 +5,7 @@ import { type ThemeColor } from '../utils/theme';
 import s from './Card.module.scss';
 
 type Props = ComponentPropsWithRef<'div'> & {
+  as?: 'div' | 'label' | 'span';
   animateIn?: boolean;
   href?: string;
   target?: ComponentPropsWithRef<'a'>['target'];
@@ -21,6 +22,7 @@ type Props = ComponentPropsWithRef<'div'> & {
 export const Card = forwardRef<HTMLDivElement, Props>(
   (
     {
+      as = 'div',
       animateIn,
       background = 'sand-0',
       backgroundHover,
@@ -37,7 +39,8 @@ export const Card = forwardRef<HTMLDivElement, Props>(
     ref,
   ) => {
     const { Link } = usePagodaUi();
-    const Element: any = props.href ? Link : 'div';
+    const Tag = as;
+    const Element: any = props.href ? Link : Tag;
 
     return (
       <Element
