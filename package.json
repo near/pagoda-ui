@@ -1,6 +1,6 @@
 {
   "name": "@near-pagoda/ui",
-  "version": "3.0.4",
+  "version": "3.1.0",
   "description": "A React component library that implements the official NEAR design system.",
   "license": "MIT",
   "repository": {
@@ -59,7 +59,7 @@
   "peerDependencies": {
     "react": "^18",
     "react-dom": "^18",
-    "zustand": "^4"
+    "zustand": "<=4.5.5"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.5",
