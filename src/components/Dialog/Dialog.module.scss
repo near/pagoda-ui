@@ -94,6 +94,11 @@
       padding: var(--gap-m);
     }
   }
+
+  &[data-transparent='true'] {
+    box-shadow: none;
+    background: transparent;
+  }
 }
 
 .body {

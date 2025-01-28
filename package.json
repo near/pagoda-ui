@@ -1,6 +1,6 @@
 {
   "name": "@near-pagoda/ui",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A React component library that implements the official NEAR design system.",
   "license": "MIT",
   "repository": {

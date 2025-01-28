@@ -19,15 +19,16 @@ type ContentProps = Omit<ComponentProps<typeof Primitive.Content>, 'title'> & {
   header?: ReactNode;
   size?: 's' | 'm' | 'l';
   title?: string | null;
+  transparentHeader?: boolean;
 };
 
 export const Content = forwardRef<HTMLDivElement, ContentProps>(
-  ({ align, children, header, size = 'm', title, ...props }, ref) => {
+  ({ align, children, className = '', header, size = 'm', title, transparentHeader, ...props }, ref) => {
     return (
       <Primitive.Portal>
         <Primitive.Overlay className={s.overlay}>
           <Primitive.Content
-            className={s.content}
+            className={`${s.content} ${className}`}
             data-align={align}
             data-size={size}
             ref={ref}
@@ -41,7 +42,7 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
             }}
             aria-describedby=""
           >
-            <div className={s.header}>
+            <div className={s.header} data-transparent={transparentHeader}>
               <Flex align="center" gap="m" style={{ marginRight: 'auto', flexGrow: 1 }}>
                 {title && (
                   <Primitive.Title asChild>
@@ -53,7 +54,13 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
               </Flex>
 
               <Primitive.Close asChild>
-                <Button label="Close" size="small" variant="secondary" fill="outline" icon={<X weight="bold" />} />
+                <Button
+                  label="Close"
+                  size="small"
+                  variant="secondary"
+                  fill={transparentHeader ? 'solid' : 'outline'}
+                  icon={<X weight="bold" />}
+                />
               </Primitive.Close>
             </div>
 
