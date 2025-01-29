@@ -70,7 +70,7 @@ export const Item = forwardRef<
 Item.displayName = 'Item';
 
 export const Indicator = () => {
-  return <SvgIcon icon={<CaretDown weight="bold" />} className={s.indicator} />;
+  return <SvgIcon icon={<CaretDown weight="bold" />} className={s.indicator} size="stretch" />;
 };
 
 export const Section = ({ children }: { children: ReactNode }) => {

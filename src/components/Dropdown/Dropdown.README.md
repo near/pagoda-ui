@@ -12,7 +12,7 @@ import { Button, Dropdown, SvgIcon } from '~/components/lib/Dropdown';
 
 <Dropdown.Root>
   <Dropdown.Trigger asChild>
-    <Button label="My Dropdown" iconRight={<Dropdown.Indicator />} />
+    <Button label="My Dropdown" labelAlignment="left" iconRight={<Dropdown.Indicator />} />
   </Dropdown.Trigger>
 
   <Dropdown.Content>

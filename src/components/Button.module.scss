@@ -236,6 +236,16 @@
       }
     }
   }
+
+  &[data-label-alignment='left'] {
+    .inner {
+      flex-grow: 1;
+    }
+    .label {
+      flex-grow: 1;
+      text-align: left;
+    }
+  }
 }
 
 .inner {

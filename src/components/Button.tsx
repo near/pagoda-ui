@@ -18,6 +18,7 @@ type Props = Omit<ComponentPropsWithRef<'button'>, 'size'> & {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   label: string;
+  labelAlignment?: 'center' | 'left';
   loading?: boolean;
   size?: Size;
   variant?: Variant;
@@ -35,6 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
       iconLeft,
       iconRight,
       label,
+      labelAlignment,
       loading,
       size = 'default',
       type = 'button',
@@ -67,6 +69,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         data-loading={loading}
         data-size={size}
         data-variant={variant}
+        data-label-alignment={labelAlignment}
         ref={ref}
         {...conditionalAttributes}
         {...forwardedProps}

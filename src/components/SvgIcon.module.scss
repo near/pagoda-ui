@@ -47,4 +47,8 @@
     width: var(--icon-size-xl);
     height: var(--icon-size-xl);
   }
+  &[data-size='stretch'] {
+    width: 100%;
+    height: 100%;
+  }
 }
