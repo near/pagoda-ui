@@ -239,14 +239,17 @@
 }
 
 .inner {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--button-gap);
 }
 
 .label {
-  display: inline-flex;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .icon {
