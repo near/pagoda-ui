@@ -39,14 +39,23 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       right,
       style,
       success,
-      type = 'text',
       ...props
     },
     ref,
   ) => {
-    const isNumber = Boolean(number);
+    const isNumber = Boolean(number) || props.type === 'number';
     const assistiveTextId = `${name}-assistive-text`;
     const variant: ThemeInputVariant = error ? 'error' : success ? 'success' : 'default';
+    let type = props.type || 'text';
+
+    if (isNumber) {
+      /*
+        A native number input (<input type="number" />) has all kinds of issues and limitations. 
+        We can combine <input type="text" input-mode="decimal" /> with numberInputHandler() for 
+        a better experience (DX and UX).
+      */
+      type = 'text';
+    }
 
     if (type === 'search' && !iconLeft) {
       iconLeft = <MagnifyingGlass weight="bold" />;

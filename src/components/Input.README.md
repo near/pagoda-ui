@@ -20,10 +20,10 @@ This will apply a default search icon on the left and fully rounded corners. The
 
 ## Number
 
-By default, an input will emit a `string` value. However, you can use the `number` prop to emit a `number` value and configure if decimal or negative numbers are allowed.
+By default, an input will emit a `string` value. However, you can use `type="number"` or the `number` prop to emit a `number` value and configure if decimal or negative numbers are allowed.
 
 ```tsx
-<Input label="My Number" number name="myInput" />
+<Input label="My Number" type="number" name="myInput" />
 <Input label="My Number" number={{allowDecimal: false, allowNegative: false}} name="myInput" />
 ```
 
