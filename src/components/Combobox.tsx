@@ -2,7 +2,7 @@
 
 import { CaretDown, CheckCircle, Circle } from '@phosphor-icons/react';
 import { useCombobox } from 'downshift';
-import type { CSSProperties, FocusEventHandler, ReactElement } from 'react';
+import type { CSSProperties, FocusEventHandler, HTMLInputAutoCompleteAttribute, ReactElement } from 'react';
 import { useMemo, useRef } from 'react';
 import { forwardRef } from 'react';
 import { useEffect } from 'react';
@@ -22,6 +22,7 @@ export type ComboboxOption = {
 };
 
 type BaseProps = {
+  autoComplete?: HTMLInputAutoCompleteAttribute; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   allowCustomInput?: boolean;
   allowNone?: boolean;
   assistive?: string;
@@ -194,6 +195,7 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
             label={props.label}
             name={props.name}
             number={props.number}
+            autoComplete={props.autoComplete}
             onBlur={onBlur}
             onClick={() => {}} // Ignore this library change: https://github.com/downshift-js/downshift/blob/master/src/hooks/MIGRATION_V8.md#usecombobox-input-click
             onFocus={onFocus}
