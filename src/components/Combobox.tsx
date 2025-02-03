@@ -1,9 +1,13 @@
-'use client';
-
 import { CaretDown, CheckCircle, Circle } from '@phosphor-icons/react';
 import { useCombobox } from 'downshift';
-import type { CSSProperties, FocusEventHandler, HTMLInputAutoCompleteAttribute, ReactElement } from 'react';
-import { useMemo, useRef } from 'react';
+import type {
+  CSSProperties,
+  FocusEventHandler,
+  FormEventHandler,
+  HTMLInputAutoCompleteAttribute,
+  ReactElement,
+} from 'react';
+import { Fragment, useMemo, useRef } from 'react';
 import { forwardRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -15,56 +19,46 @@ import { Input } from './Input';
 import { SvgIcon } from './SvgIcon';
 import { Text } from './Text';
 
-export type ComboboxOption = {
+export type ComboboxItem = {
+  group?: string;
   hidden?: boolean;
   label?: string;
-  value: string | number;
+  value: string;
 };
 
-type BaseProps = {
-  autoComplete?: HTMLInputAutoCompleteAttribute; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+type Props = {
   allowCustomInput?: boolean;
   allowNone?: boolean;
   assistive?: string;
+  autoComplete?: HTMLInputAutoCompleteAttribute; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   error?: string;
   icon?: ReactElement;
-  items: ComboboxOption[];
-  label?: string;
+  infoText?: string;
+  items: ComboboxItem[];
+  label: string;
   maxDropdownHeight?: string;
   name: string;
   noneLabel?: string;
-  onBlur?: (event: unknown) => void;
+  onBlur?: (event: any) => void;
+  onChange: (value: string | null) => any;
+  onCreateItem?: (inputText: string) => any;
+  onEditItem?: (selectedItemValue: string) => any;
   placeholder?: string;
   style?: CSSProperties;
   success?: string;
+  value: string | null | undefined;
 };
-
-type ConditionalProps =
-  | {
-      value: number | null | undefined;
-      number: true;
-      onChange: (value: number | null) => unknown;
-    }
-  | {
-      value: string | null | undefined;
-      number?: never;
-      onChange: (value: string | null) => unknown;
-    };
-
-type Props = BaseProps & ConditionalProps;
 
 export const Combobox = forwardRef<HTMLInputElement, Props>(
   ({ allowCustomInput, allowNone, noneLabel, ...props }, ref) => {
     const noneItem = useMemo(() => {
-      const item: ComboboxOption = {
-        label: noneLabel ?? 'None',
-        value: '__NONE__',
-      };
+      const item: ComboboxItem = { label: noneLabel || 'None', value: '__NONE__' };
       return item;
     }, [noneLabel]);
 
-    const internalCurrentValue = useRef<string | number | null | undefined>(undefined);
-    const internalCurrentValueBeforeFocus = useRef<string | number | null | undefined>(undefined);
+    const inputValue = useRef<string>('');
+    const internalCurrentValue = useRef<string | null | undefined>(undefined);
+    const internalCurrentValueBeforeFocus = useRef<string | null | undefined>(undefined);
     const onBlurTimeout = useRef<NodeJS.Timeout>();
     const [filteredItems, setFilteredItems] = useState(allowNone ? [noneItem, ...props.items] : props.items);
     const defaultSelectedItem = props.items.find((item) => item.value === props.value);
@@ -89,14 +83,13 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
         setFilteredItems(results);
 
         if (allowCustomInput) {
-          if (props.number) {
-            props.onChange(Number(event.inputValue) ?? null);
-          } else {
-            props.onChange(event.inputValue ?? '');
-          }
+          props.onChange(event.inputValue || internalCurrentValueBeforeFocus.current || '');
+          console.log('onInputValueChange', event.inputValue ?? '');
         }
       },
       onSelectedItemChange(event) {
+        console.log('onSelectedItemChange', event);
+
         const newValue = event.selectedItem?.value === '__NONE__' ? null : (event.selectedItem?.value ?? null);
         internalCurrentValue.current = newValue;
 
@@ -105,16 +98,8 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
 
         if (newValue === null) {
           props.onChange(null);
-        } else if (props.number && typeof newValue === 'number') {
-          props.onChange(newValue);
-        } else if (!props.number && typeof newValue === 'string') {
-          props.onChange(newValue);
         } else {
-          throw new Error(
-            `Combobox => Invalid value mismatch. ${props.name}, Expected type: ${
-              props.number ? 'number' : 'string'
-            }, Actual value type: ${typeof newValue}`,
-          );
+          props.onChange(newValue);
         }
       },
     });
@@ -134,6 +119,12 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
         const comboboxOnBlur = combobox.getInputProps().onBlur;
         comboboxOnBlur && comboboxOnBlur(event);
       }, 100);
+    };
+
+    const onInput: FormEventHandler<HTMLInputElement> = (event) => {
+      inputValue.current = (event.target as HTMLInputElement).value;
+      const comboboxOnInput = combobox.getInputProps().onInput;
+      comboboxOnInput && comboboxOnInput(event);
     };
 
     const onFocus: FocusEventHandler<HTMLInputElement> = () => {
@@ -179,12 +170,18 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
       }
     }, [allowCustomInput, allowNone, noneItem, selectItem, props.value, debouncedItems, setInputValue]);
 
+    const shouldRenderGroupLabel = (item: ComboboxItem, index: number) => {
+      const previousItem = filteredItems[Math.max(0, index - 1)];
+      if (item.group && index === 0) return true;
+      return item.group && item.group !== previousItem?.group;
+    };
+
     return (
       <div
         className={s.wrapper}
         data-open={combobox.isOpen && !forceOverrideClosed}
-        data-number={props.number}
         style={props.style}
+        data-grow={typeof props.style?.width === 'undefined'}
       >
         <div className={s.innerWrapper}>
           <Input
@@ -194,11 +191,11 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
             iconLeft={props.icon}
             label={props.label}
             name={props.name}
-            number={props.number}
             autoComplete={props.autoComplete}
             onBlur={onBlur}
             onClick={() => {}} // Ignore this library change: https://github.com/downshift-js/downshift/blob/master/src/hooks/MIGRATION_V8.md#usecombobox-input-click
             onFocus={onFocus}
+            onInput={onInput}
             placeholder={props.placeholder}
             ref={mergeRefs([ref, comboboxInputRef])}
             right={
@@ -208,22 +205,35 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
                 </button>
 
                 <ul className={s.dropdown} {...combobox.getMenuProps()} style={{ maxHeight: props.maxDropdownHeight }}>
+                  {props.infoText && (
+                    <li className={s.infoText}>
+                      <Text size="text-s">{props.infoText}</Text>
+                    </li>
+                  )}
+
                   {filteredItems.map((item, index) => (
-                    <li
-                      className={s.dropdownItem}
-                      data-highlighted={combobox.highlightedIndex === index}
-                      data-selected={combobox.selectedItem?.value === item.value}
-                      key={item.value}
-                      {...combobox.getItemProps({ item, index })}
-                    >
-                      {combobox.selectedItem?.value === item.value ? (
-                        <SvgIcon icon={<CheckCircle weight="duotone" />} color="green-9" />
-                      ) : (
-                        <SvgIcon icon={<Circle weight="duotone" />} color="sand-10" />
+                    <Fragment key={item.value}>
+                      {shouldRenderGroupLabel(item, index) && (
+                        <li className={s.dropdownGroupLabel}>
+                          <Text as="h5">{item.group}</Text>
+                        </li>
                       )}
 
-                      {item.label ?? item.value}
-                    </li>
+                      <li
+                        className={s.dropdownItem}
+                        data-highlighted={combobox.highlightedIndex === index}
+                        data-selected={combobox.selectedItem?.value === item.value}
+                        {...combobox.getItemProps({ item, index })}
+                      >
+                        {combobox.selectedItem?.value === item.value ? (
+                          <SvgIcon icon={<CheckCircle weight="duotone" />} color="green-9" />
+                        ) : (
+                          <SvgIcon icon={<Circle weight="duotone" />} color="sand-10" />
+                        )}
+
+                        {item.label ?? item.value}
+                      </li>
+                    </Fragment>
                   ))}
 
                   {filteredItems.length === 0 && (
@@ -246,3 +256,16 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
   },
 );
 Combobox.displayName = 'Combobox';
+
+export function useComboboxItemMapper<T extends unknown[]>(
+  array: T | undefined,
+  mapItem: (item: T[number]) => ComboboxItem | ComboboxItem[] | null,
+  dependencies?: unknown[],
+) {
+  const options = useMemo(() => {
+    return (array?.flatMap(mapItem) ?? []).filter((value) => !!value) as ComboboxItem[];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [array, ...(dependencies ?? [])]);
+
+  return options;
+}
