@@ -141,7 +141,7 @@
   display: block;
   flex-grow: 1;
   border: none;
-  background: none;
+  background: none !important;
   margin: 0;
   min-width: 0;
   width: 100%;
@@ -156,6 +156,15 @@
   transition:
     color var(--transition-speed),
     opacity var(--transition-speed);
+
+  &[data-com-onepassword-filled],
+  &:autofill,
+  &:-webkit-autofill {
+    -webkit-text-fill-color: var(--sand-12) !important;
+    color: var(--sand-12) !important;
+    caret-color: var(--sand-12) !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
 
   &::placeholder {
     color: var(--sand-10);

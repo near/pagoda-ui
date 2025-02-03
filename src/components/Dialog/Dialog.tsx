@@ -24,15 +24,33 @@ type ContentProps = Omit<ComponentProps<typeof Primitive.Content>, 'title'> & {
 
 export const Content = forwardRef<HTMLDivElement, ContentProps>(
   ({ align, children, className = '', header, size = 'm', title, transparentHeader, ...props }, ref) => {
+    const onPointerDownOutside: ContentProps['onPointerDownOutside'] = (event) => {
+      const target = event.target as HTMLElement;
+      if (!target.hasAttribute('data-dialog-overlay')) {
+        /*
+          The dialog should only close if the <Primitive.Overlay /> was clicked.
+          Browser extensions like 1Password will overlay fixed DOM elements that 
+          live outside the <Primitive.Content /> tree (directly in the <body>). 
+          Clicking these extension generated buttons should not close the dialog.
+        */
+        event.preventDefault();
+        return;
+      }
+      if (props.onPointerDownOutside) {
+        props.onPointerDownOutside(event);
+      }
+    };
+
     return (
       <Primitive.Portal>
-        <Primitive.Overlay className={s.overlay}>
+        <Primitive.Overlay className={s.overlay} data-dialog-overlay>
           <Primitive.Content
             className={`${s.content} ${className}`}
             data-align={align}
             data-size={size}
             ref={ref}
             {...props}
+            onPointerDownOutside={onPointerDownOutside}
             onSubmit={(event) => {
               /*
               This prevents forms on the parent page from being submitted when a form
