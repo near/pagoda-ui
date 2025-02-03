@@ -37,7 +37,7 @@ type Props = {
   /**
    * @deprecated please use "options" prop instead
    */
-  items: ComboboxOption[];
+  items?: ComboboxOption[];
   label: string;
   maxDropdownHeight?: string;
   name: string;
