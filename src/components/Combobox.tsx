@@ -19,7 +19,7 @@ import { Input } from './Input';
 import { SvgIcon } from './SvgIcon';
 import { Text } from './Text';
 
-export type ComboboxItem = {
+export type ComboboxOption = {
   group?: string;
   hidden?: boolean;
   label?: string;
@@ -34,7 +34,10 @@ type Props = {
   error?: string;
   icon?: ReactElement;
   infoText?: string;
-  items: ComboboxItem[];
+  /**
+   * @deprecated please use "options" prop instead
+   */
+  items: ComboboxOption[];
   label: string;
   maxDropdownHeight?: string;
   name: string;
@@ -43,6 +46,7 @@ type Props = {
   onChange: (value: string | null) => any;
   onCreateItem?: (inputText: string) => any;
   onEditItem?: (selectedItemValue: string) => any;
+  options: ComboboxOption[];
   placeholder?: string;
   style?: CSSProperties;
   success?: string;
@@ -51,33 +55,37 @@ type Props = {
 
 export const Combobox = forwardRef<HTMLInputElement, Props>(
   ({ allowCustomInput, allowNone, noneLabel, ...props }, ref) => {
-    const noneItem = useMemo(() => {
-      const item: ComboboxItem = { label: noneLabel || 'None', value: '__NONE__' };
-      return item;
+    if (props.items) {
+      props.options = props.items;
+    }
+
+    const noneOption = useMemo(() => {
+      const option: ComboboxOption = { label: noneLabel || 'None', value: '__NONE__' };
+      return option;
     }, [noneLabel]);
 
     const inputValue = useRef<string>('');
     const internalCurrentValue = useRef<string | null | undefined>(undefined);
     const internalCurrentValueBeforeFocus = useRef<string | null | undefined>(undefined);
     const onBlurTimeout = useRef<NodeJS.Timeout>();
-    const [filteredItems, setFilteredItems] = useState(allowNone ? [noneItem, ...props.items] : props.items);
-    const defaultSelectedItem = props.items.find((item) => item.value === props.value);
-    const forceOverrideClosed = allowCustomInput && filteredItems.length === 0;
-    const debouncedItems = useDebouncedValue(props.items, 25); // This debounce avoids race condition where prop.items updates before props.value
+    const [filteredOptions, setFilteredItems] = useState(allowNone ? [noneOption, ...props.options] : props.options);
+    const defaultSelectedItem = props.options.find((o) => o.value === props.value);
+    const forceOverrideClosed = allowCustomInput && filteredOptions.length === 0;
+    const debouncedOptions = useDebouncedValue(props.options, 25); // This debounce avoids race condition where prop.items updates before props.value
 
     const { selectItem, setInputValue, ...combobox } = useCombobox({
       id: props.name,
       defaultSelectedItem,
-      items: filteredItems,
+      items: filteredOptions,
       itemToString(item) {
         return item ? (item.label ?? item.value.toString()) : '';
       },
       onInputValueChange(event) {
         const query = event.inputValue?.toLowerCase() ?? '';
-        const items = allowNone ? [noneItem, ...props.items] : props.items;
-        const results = items.filter((item) => {
-          if (item.hidden) return false;
-          const label = (item.label ?? item.value).toString().toLowerCase();
+        const options = allowNone ? [noneOption, ...props.options] : props.options;
+        const results = options.filter((o) => {
+          if (o.hidden) return false;
+          const label = (o.label ?? o.value).toString().toLowerCase();
           return label.includes(query);
         });
         setFilteredItems(results);
@@ -142,17 +150,17 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
     const comboboxInputRef = (combobox.getInputProps() as any).ref; // This value actually exists, the types are wrong
 
     useEffect(() => {
-      const items = allowNone ? [noneItem, ...props.items] : props.items;
-      setFilteredItems(items.filter((item) => !item.hidden));
-    }, [allowNone, noneItem, props.items]);
+      const options = allowNone ? [noneOption, ...props.options] : props.options;
+      setFilteredItems(options.filter((o) => !o.hidden));
+    }, [allowNone, noneOption, props.options]);
 
     useEffect(() => {
-      const selected = debouncedItems.find((item) => item.value === props.value);
+      const selected = debouncedOptions.find((o) => o.value === props.value);
 
       if (props.value !== internalCurrentValue.current) {
         if (props.value === null && allowNone) {
           internalCurrentValue.current = null;
-          selectItem(noneItem);
+          selectItem(noneOption);
         } else {
           if (selected) {
             internalCurrentValue.current = selected.value;
@@ -166,14 +174,14 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
           }
         }
       } else if (props.value !== null) {
-        setInputValue(selected?.label ?? selected?.value.toString() ?? ''); // In the case of the selected item's label being updated, we need to update the input
+        setInputValue(selected?.label ?? selected?.value.toString() ?? ''); // In the case of the selected option's label being updated, we need to update the input
       }
-    }, [allowCustomInput, allowNone, noneItem, selectItem, props.value, debouncedItems, setInputValue]);
+    }, [allowCustomInput, allowNone, noneOption, selectItem, props.value, debouncedOptions, setInputValue]);
 
-    const shouldRenderGroupLabel = (item: ComboboxItem, index: number) => {
-      const previousItem = filteredItems[Math.max(0, index - 1)];
-      if (item.group && index === 0) return true;
-      return item.group && item.group !== previousItem?.group;
+    const shouldRenderGroupLabel = (option: ComboboxOption, index: number) => {
+      const previousItem = filteredOptions[Math.max(0, index - 1)];
+      if (option.group && index === 0) return true;
+      return option.group && option.group !== previousItem?.group;
     };
 
     return (
@@ -211,35 +219,35 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
                     </li>
                   )}
 
-                  {filteredItems.map((item, index) => (
-                    <Fragment key={item.value}>
-                      {shouldRenderGroupLabel(item, index) && (
+                  {filteredOptions.map((option, index) => (
+                    <Fragment key={option.value}>
+                      {shouldRenderGroupLabel(option, index) && (
                         <li className={s.dropdownGroupLabel}>
-                          <Text as="h5">{item.group}</Text>
+                          <Text as="h5">{option.group}</Text>
                         </li>
                       )}
 
                       <li
                         className={s.dropdownItem}
                         data-highlighted={combobox.highlightedIndex === index}
-                        data-selected={combobox.selectedItem?.value === item.value}
-                        {...combobox.getItemProps({ item, index })}
+                        data-selected={combobox.selectedItem?.value === option.value}
+                        {...combobox.getItemProps({ item: option, index })}
                       >
-                        {combobox.selectedItem?.value === item.value ? (
+                        {combobox.selectedItem?.value === option.value ? (
                           <SvgIcon icon={<CheckCircle weight="duotone" />} color="green-9" />
                         ) : (
                           <SvgIcon icon={<Circle weight="duotone" />} color="sand-10" />
                         )}
 
-                        {item.label ?? item.value}
+                        {option.label ?? option.value}
                       </li>
                     </Fragment>
                   ))}
 
-                  {filteredItems.length === 0 && (
+                  {filteredOptions.length === 0 && (
                     <li className={s.content}>
                       <Text size="text-s">
-                        {props.items.length === 0
+                        {props.options.length === 0
                           ? 'No available options.'
                           : 'No matching options. Try a different search?'}
                       </Text>
@@ -257,13 +265,13 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
 );
 Combobox.displayName = 'Combobox';
 
-export function useComboboxItemMapper<T extends unknown[]>(
+export function useComboboxOptionMapper<T extends unknown[]>(
   array: T | undefined,
-  mapItem: (item: T[number]) => ComboboxItem | ComboboxItem[] | null,
+  mapper: (item: T[number]) => ComboboxOption | ComboboxOption[] | null,
   dependencies?: unknown[],
 ) {
   const options = useMemo(() => {
-    return (array?.flatMap(mapItem) ?? []).filter((value) => !!value) as ComboboxItem[];
+    return (array?.flatMap(mapper) ?? []).filter((value) => !!value) as ComboboxOption[];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [array, ...(dependencies ?? [])]);
 
