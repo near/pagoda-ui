@@ -9,10 +9,6 @@
   }
 }
 
-.item {
-  transition: var(--transitions);
-}
-
 .header {
   display: block;
 }
@@ -29,7 +25,6 @@
   color: var(--sand-12);
   padding: 0;
   cursor: pointer;
-  transition: var(--transitions);
   border-radius: 2px;
   outline: 0px solid var(--violet-5);
   outline-offset: var(--gap-s);
