@@ -1,4 +1,4 @@
-import { type CSSProperties, type ReactNode } from 'react';
+import { type CSSProperties, forwardRef, type ReactNode } from 'react';
 
 import { type ThemeColor, type ThemeGap } from '../utils/theme';
 import { Container } from './Container';
@@ -18,46 +18,54 @@ export type SectionProps = {
   tabs?: boolean;
 };
 
-export const Section = ({
-  background,
-  bleed, // No container
-  children,
-  className = '',
-  gap = 'l',
-  grow,
-  padding,
-  style,
-  tabs,
-  ...props
-}: SectionProps) => {
-  const variables = {
-    '--section-background-color': `var(--${background})`,
-  };
+export const Section = forwardRef<HTMLElement, SectionProps>(
+  (
+    {
+      background,
+      bleed, // No container
+      children,
+      className = '',
+      gap = 'l',
+      grow,
+      padding,
+      style,
+      tabs,
+      ...props
+    },
+    ref,
+  ) => {
+    const variables = {
+      '--section-background-color': `var(--${background})`,
+    };
 
-  return (
-    <section
-      className={`${s.section} ${className}`}
-      data-background={background}
-      data-grow={grow}
-      data-padding={padding}
-      data-tabs={tabs}
-      style={{
-        ...style,
-        ...variables,
-      }}
-      {...props}
-    >
-      {bleed ? (
-        <Flex direction="column" gap={gap}>
-          {children}
-        </Flex>
-      ) : (
-        <Container>
+    return (
+      <section
+        className={`${s.section} ${className}`}
+        data-background={background}
+        data-grow={grow}
+        data-padding={padding}
+        data-tabs={tabs}
+        style={{
+          ...style,
+          ...variables,
+        }}
+        ref={ref}
+        {...props}
+      >
+        {bleed ? (
           <Flex direction="column" gap={gap}>
             {children}
           </Flex>
-        </Container>
-      )}
-    </section>
-  );
-};
+        ) : (
+          <Container>
+            <Flex direction="column" gap={gap}>
+              {children}
+            </Flex>
+          </Container>
+        )}
+      </section>
+    );
+  },
+);
+
+Section.displayName = 'Section';
