@@ -2,6 +2,7 @@ import { ThemeProvider } from 'next-themes';
 import { type ComponentProps, createContext, ForwardedRef, type ReactNode, useContext } from 'react';
 
 type PagodaUi = {
+  forcedTheme?: 'dark' | 'light';
   Link: (props: {
     children: ReactNode;
     className?: string;
@@ -19,7 +20,7 @@ export const PagodaUiContext = createContext<PagodaUi | null>(null);
 
 export const PagodaUiProvider = ({ value, children }: ComponentProps<typeof PagodaUiContext.Provider>) => {
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider enableSystem={!value?.forcedTheme} forcedTheme={value?.forcedTheme} attribute="class">
       <PagodaUiContext.Provider value={value}>{children}</PagodaUiContext.Provider>
     </ThemeProvider>
   );
