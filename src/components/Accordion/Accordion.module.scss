@@ -51,13 +51,12 @@
     stroke: currentColor;
   }
 
-  [data-state='open'] & {
+  .header[data-state='open'] & {
     transform: rotate(180deg);
   }
 }
 
 .content {
-  overflow: hidden;
   font: var(--text-s);
   padding-block: var(--gap-m);
 
@@ -66,6 +65,7 @@
   }
   &[data-state='closed'] {
     animation: slideUp var(--transition-speed);
+    overflow: hidden;
   }
 
   @keyframes slideDown {
