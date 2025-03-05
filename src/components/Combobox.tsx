@@ -83,21 +83,30 @@ export const Combobox = forwardRef<HTMLInputElement, Props>(
       onInputValueChange(event) {
         const query = event.inputValue?.toLowerCase() ?? '';
         const options = allowNone ? [noneOption, ...props.options] : props.options;
+
         const results = options.filter((o) => {
           if (o.hidden) return false;
           const label = (o.label ?? o.value).toString().toLowerCase();
           return label.includes(query);
         });
+
         setFilteredItems(results);
 
-        if (allowCustomInput) {
-          props.onChange(event.inputValue || internalCurrentValueBeforeFocus.current || '');
-          console.log('onInputValueChange', event.inputValue ?? '');
+        if (allowCustomInput && event.inputValue) {
+          const selected = results.find((option) => (option.label || option.value) === event.inputValue);
+          if (selected) {
+            if (selected.value !== props.value) {
+              props.onChange(selected.value);
+            }
+          } else {
+            if (event.selectedItem) {
+              selectItem(null);
+            }
+            props.onChange(event.inputValue);
+          }
         }
       },
       onSelectedItemChange(event) {
-        console.log('onSelectedItemChange', event);
-
         const newValue = event.selectedItem?.value === '__NONE__' ? null : (event.selectedItem?.value ?? null);
         internalCurrentValue.current = newValue;
 
